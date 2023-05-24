@@ -104,7 +104,7 @@ const getColumnsMostViewed = () => {
     if (isTablet) {
       return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
     } else {
-      return 'col-lg-2 col-md-2'
+      return 'col-lg-2 col-md-2 col-sm-2 col-xs-2'
     }
   }
 };
@@ -116,7 +116,7 @@ const getColumnsScenes = () => {
     if (isTablet) {
       return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
     } else {
-      return 'col-lg-2 col-md-2'
+      return 'col-lg-3 col-md-3 col-sm-3 col-xs-3'
     }
   }
 };
@@ -125,7 +125,7 @@ const getRowScenes = () => {
   if (isTablet) {
     return 'col-lg-12 col-md-12 col-sm-12 col-xs-12 py-4'
   } else {
-    return 'col-lg-7'
+    return 'col-lg-7 col-md-7 col-sm-7 col-xs-7'
   }
 };
 
@@ -133,7 +133,7 @@ const getRowIdol = () => {
   if (isTablet) {
     return 'col-lg-12 col-md-12 col-sm-12 col-xs-12 py-4'
   } else {
-    return 'col-lg-5'
+    return 'col-lg-5 col-md-5 col-sm-5 col-xs-5'
   }
 };
 </script>
