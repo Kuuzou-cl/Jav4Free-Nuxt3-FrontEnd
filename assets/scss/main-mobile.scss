@@ -1,0 +1,100 @@
+/* Large desktop */
+@media (min-width: 1200px) {}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+    //Card Scene
+    .card-scene .title {
+        font-size: 14px;
+        margin: 0;
+        font-weight: 260 !important;
+    }
+
+    //Card Jav Carousel
+    .movie {
+
+        .heading-primary {
+            font-size: 12px;
+        }
+
+        .movie-description {
+            font-size: 10px;
+        }
+
+        .movie-tag {
+            font-size: 10px;
+        }
+    }
+
+    .info {
+        font-size: 12px;
+    }
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+    //Navbar
+    nav {
+        .nav-link {
+            color: #FFF !important;
+        }
+    }
+    
+    //Pagination
+    .pages-number{
+        display: none;
+    }
+
+    //Card Jav Carousel
+    .movie {
+
+        .movie-hero {
+            flex: 0 0 60%;
+        }
+
+        .movie-content {
+            padding: 20px 20px;
+        }
+
+        .movie-title {
+            display: block;
+        }
+
+        .heading-primary {
+            font-size: 12px;
+        }
+
+        .movie-tag {
+            font-size: 10px;
+        }
+
+        .movie-tag-1 {
+            background-color: #ff5858;
+        }
+
+        .movie-tag-2 {
+            background-color: #ff8d58;
+        }
+
+        .movie-tag-3 {
+            display: none;
+        }
+
+        .movie-description {
+            display: none;
+        }
+
+        .movie-price {
+            display: none;
+        }
+    }
+
+    //Card Idol
+    .card-idol {
+        max-width: 200px;
+    }
+
+}

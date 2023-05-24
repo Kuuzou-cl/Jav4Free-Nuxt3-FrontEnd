@@ -1,0 +1,76 @@
+<template>
+    <div class="container-fluid">
+        <div class="row row-title my-2 py-1">
+            <div class="col-lg-12 text-center">
+                <h6>{{ getScene.Scene[0].title }}</h6>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <video id="scene_player">
+                        <source :src="getScene.Scene[0].video" title='720p' type="video/mp4" />
+                        <source :src="getScene.Scene[0].video480p" title='480p' type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="row row-title my-2 py-1">
+            <div class="col-lg-12 text-center">
+                <h6>Related Videos</h6>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div v-for="scene in  getRelatedScene.Scenes " :key="scene.id" v-bind:class="getColumnsScenes()">
+                    <CardScene v-bind:data="scene" />
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+const route = useRoute();
+const { isMobile, isTablet } = useDevice();
+let id = route.params.id;
+
+let limitRelated = 8;
+
+if (isMobile) {
+    limitRelated = 4
+}
+
+const { data: getScene } = await useFetch('https://jav.souzou.dev/scenes/scenev2?code=' + id);
+const { data: getRelatedScene } = await useFetch("https://jav.souzou.dev/scenes/relatedScenesv2?id=" + getScene._rawValue.Scene[0].id + "&limit=" + limitRelated);
+const view = await useFetch('https://jav.souzou.dev/scenes/newViewv2?id=' + getScene._rawValue.Scene[0].id);
+
+onMounted(() => {
+    var player = fluidPlayer('scene_player', {
+        layoutControls: {
+            layout: "default",
+            fillToContainer: false,
+            preload: true,
+            posterImage: getScene._rawValue.Scene[0].staticImage,
+            timelinePreview: {
+                file: getScene._rawValue.Scene[0].vtt,
+                type: "VTT",
+
+            },
+            allowTheatre: false,
+            contextMenu: {
+                controls: false
+            }
+        },
+    });
+});
+
+const getColumnsScenes = () => {
+    if (isTablet) {
+        return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
+    } else {
+        return 'col-lg-3 col-md-3 col-sm-3 col-xs-3'
+    }
+};
+
+</script>

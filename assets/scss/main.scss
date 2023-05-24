@@ -1,0 +1,561 @@
+// set theme colors
+$primary: #da0000;
+$dark: #212121;
+$theme1: #33a8d1;
+$font-family-base: 'Raleway', sans-serif;
+//  Load bootstrap 5 style
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+//  Load custom font
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600;700&display=swap');
+
+body {
+    background-image: url("~/assets/img/denim.webp");
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+}
+
+//General
+.width-fix {
+    width: 100%;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
+}
+
+.row-title {
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    background-color: #ffffff00;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    h6 {
+        margin: auto;
+    }
+}
+
+.btn-more {
+    width: 100%;
+    color: #fff !important;
+    background-color: #141414;
+    border-width: 2px;
+    border-image: linear-gradient(to right, #000000 75%, #da0000 25%);
+    /* gradient with required colors */
+    border-image-slice: 1;
+    border-radius: 0;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.btn-more:hover {
+    color: #fff !important;
+    background-color: #141414;
+}
+
+//Category Page
+.category-title {
+    color: #fff !important;
+    background-color: #141414;
+    border-color: #141414 !important;
+    width: 250px;
+    margin: 5px 0px;
+    box-shadow: none !important;
+    border-radius: 0px;
+}
+
+.category-title:hover {
+    color: #f8faff !important;
+    border-color: #da0000 !important;
+    background-color: #000000;
+}
+
+//Notification
+.alert-warning {
+    border-color: #141414;
+    background-color: #141414;
+    color: #fff;
+}
+
+//Card Jav Carousel
+.movie {
+    padding: 0%;
+    max-width: 1000px;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+    text-decoration: none !important;
+
+    .movie-hero {
+        flex: 0 0 45%;
+
+        .movie-img {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .movie-content {
+        background-color: #141414;
+        flex: 1;
+        padding: 35px 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .movie-price {
+        background: linear-gradient(to bottom, #ff5858 25%, #ff8d58 100%);
+        flex: 0 0 50px;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: rgb(255, 255, 255);
+        writing-mode: vertical-lr;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .movie-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .heading-primary {
+        font-size: 16px;
+        margin-right: auto;
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .movie-tag {
+        font-size: 10px;
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 100px;
+        margin-right: 8px;
+        display: block;
+        text-transform: uppercase;
+    }
+
+    .movie-tag-1 {
+        background-color: #ff8d58;
+    }
+
+    .movie-tag-2 {
+        background-color: #ff5858;
+    }
+
+    .movie-tag-3 {
+        background-color: #ff8d58;
+    }
+
+    .movie-description {
+        font-size: 14px;
+        color: #fff;
+        letter-spacing: 1px;
+    }
+}
+
+// Card Jav
+.card-jav {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    img {
+        transition: all linear 0.25s;
+        width: 100%;
+    }
+
+    .card-jav-code {
+        position: absolute;
+        padding: 5px;
+        left: 30px;
+        bottom: 70px;
+        font-size: 25px;
+        color: #fff;
+        background-color: #000000b1;
+        border: 2px solid #fff;
+        font-weight: 700;
+        letter-spacing: 2px;
+        transition: all linear 0.25s;
+    }
+
+    .card-jav-tag-1 {
+        position: absolute;
+        right: 30px;
+        top: 120px;
+        transition: all linear 0.25s;
+        font-size: 10px;
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 100px;
+        margin-right: 8px;
+        display: block;
+        text-transform: uppercase;
+        background-color: #ff5858;
+    }
+
+    .card-jav-tag-2 {
+        position: absolute;
+        right: 120px;
+        top: 120px;
+        transition: all linear 0.25s;
+        font-size: 10px;
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 100px;
+        margin-right: 8px;
+        display: block;
+        text-transform: uppercase;
+        background-color: #ff8d58;
+    }
+
+    .card-jav-tag-3 {
+        position: absolute;
+        right: 210px;
+        top: 120px;
+        transition: all linear 0.25s;
+        font-size: 10px;
+        color: #fff;
+        padding: 2px 7px;
+        border-radius: 100px;
+        margin-right: 8px;
+        display: block;
+        text-transform: uppercase;
+        background-color: #ff5858;
+    }
+
+}
+
+.card-jav:hover {
+
+    .card-jav-code {
+        color: #fff;
+        background-color: #000000;
+        border: 2px solid #fff;
+    }
+
+    img {
+        filter: grayscale(100%);
+    }
+
+}
+
+//Card Scene
+.card-scene {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background-color: #ffffff00;
+
+    p {
+        color: #ffffff !important;
+        font-weight: bolder;
+    }
+
+    cursor: pointer;
+
+    img {
+        z-index: 3;
+    }
+
+    video {
+        display: none;
+    }
+
+}
+
+.card-scene-media:hover,
+.card-scene-media:active,
+.card-scene-media:focus {
+    img {
+        display: none;
+    }
+
+    video {
+        display: block;
+        z-index: 1;
+        background-color: #ffffff00;
+    }
+}
+
+.card-scene .box-code {
+    top: 0%;
+    color: #f8faff;
+    text-align: right;
+    width: 50%;
+    padding-right: 3%;
+    position: absolute;
+    right: 0%;
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.card-scene .box-code2 {
+    top: 0%;
+    color: #f8faff;
+    text-align: left;
+    width: 50%;
+    padding-left: 3%;
+    position: absolute;
+    left: 0%;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.card-scene .post {
+    text-transform: uppercase;
+    text-align: center !important;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+.card-scene .title {
+    font-size: 13px;
+    margin: 0;
+    font-weight: 260 !important;
+}
+
+.card-scene .box-content {
+    width: 100%;
+    padding: 5px 10px;
+    text-align: justify;
+    z-index: 1;
+}
+
+//Card Idol
+.card-idol {
+    overflow: hidden;
+    position: relative;
+    border-width: 0;
+    border-radius: 0;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.card-idol:before {
+    position: absolute;
+    content: ""
+}
+
+.card-idol:before {
+    width: 150%;
+    height: 7%;
+    background: #141414;
+    top: 80%;
+    left: 0%;
+    z-index: 1;
+}
+
+.card-idol .card-banner {
+    width: 100%;
+    padding: 0px 10px;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    transition: all 0.8s ease 0s;
+    top: 80%;
+    left: -1%;
+    color: #fff;
+}
+
+.card-idol .card-name {
+    display: inline-block;
+    font-size: 14px;
+    text-decoration-line: underline;
+    text-decoration-color: #da0000;
+    text-transform: uppercase
+}
+
+
+//Navbar
+nav {
+    background-color: #ffffff00 !important;
+
+    .navbar-brand img {
+        max-width: 80px;
+        min-width: 100px;
+    }
+
+    .nav-link {
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #141414 !important;
+    }
+
+    .nav-link:hover {
+        color: #fff !important;
+    }
+
+
+    .nav-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .text::before {
+        content: attr(data-text);
+        position: absolute;
+        color: #fff;
+        width: 0;
+        overflow: hidden;
+        transition: 0.6s;
+    }
+
+    .nav-container::before {
+        content: "";
+        width: 0%;
+        height: 100%;
+        position: absolute;
+        background: #141414;
+        right: 0;
+        top: 0;
+        transition: 0.6s;
+    }
+
+    .nav-container:hover .text::before,
+    .nav-container:hover::before {
+        width: 100%;
+    }
+}
+
+//Footer
+footer {
+    width: 100%;
+    text-align: center;
+
+    a {
+        color: #fff;
+    }
+
+    a:hover {
+        color: #ed181e;
+    }
+}
+
+.footer .copyright {
+    box-shadow: 0px -5px 20px -2px #14141486;
+    background: #141414;
+}
+
+.footer .copyright p {
+    color: #fff;
+    height: 5px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+//Jav Page
+.container-jav{
+    background: #141414;
+}
+
+.info{
+    color: #fff; 
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.info-categories {
+    transition: all linear 0.25s;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 100px;
+    display: block;
+    text-transform: uppercase;
+    background-color: #ff5858;
+    text-align: center;
+}
+
+.info-idols {
+    transition: all linear 0.25s;
+    font-size: 10px;
+    color: #fff;
+    border-radius: 100px;
+    display: block;
+    text-transform: uppercase;
+    background-color: #ff8d58;
+    text-align: center;
+}
+
+//Pagination
+.container-pagination {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: -3px -3px 7px #1f1f1f, 3px 3px 5px #141414;
+    width: min-content;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    margin: 0% !important;
+}
+
+.pagination li {
+    flex: 1;
+    margin: 0px 5px;
+    background: #141414;
+    border-radius: 3px;
+}
+
+.pagination li a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    height: 45px;
+    width: 55px;
+    display: block;
+    line-height: 45px;
+    text-align: center;
+}
+
+.pagination li:first-child a {
+    width: 120px;
+}
+
+.pagination li:last-child a {
+    width: 100px;
+}
+
+.pagination li.active a {
+    font-size: 17px;
+    color: #141414;
+    background: #fff;
+}
+
+.pagination li:first-child {
+    margin: 0 15px 0 0;
+}
+
+.pagination li:last-child {
+    margin: 0 0 0 15px;
+}
