@@ -19,9 +19,9 @@
                     </div>
                     <div class="row">
                         <div v-for="category in JavData.Categories" :key="category.id" class="col-lg-2">
-                            <p class="info-categories">
-                                {{ category.name }}
-                            </p>
+                            <NuxtLink :to="'/categories/' + category.name + '/1'" class="info-categories">
+                                <p>{{ category.name }}</p>
+                            </NuxtLink>
                         </div>
                     </div>
                     <div class="row">
@@ -29,11 +29,11 @@
                     </div>
                     <div class="row">
                         <div v-for="idol in JavData.Idols" :key="idol.id" class="col-lg-3">
-                            <p class="info-idols" >
-                            {{ idol.name }}
-                        </p>
+                            <NuxtLink :to="'/idols/' + idol.name + '/1'" class="info-idols">
+                                <p>{{ idol.name }}</p>
+                            </NuxtLink>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@ const { data: getRelatedJavs } = await useFetch("https://jav.souzou.dev/javs/rel
 
 const getColumnsScenes = () => {
     if (isMobile || isTablet) {
-      return 'col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-center'     
-    }else{
-      return 'col-lg-3'
+        return 'col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-center'
+    } else {
+        return 'col-lg-3'
     }
 };
 

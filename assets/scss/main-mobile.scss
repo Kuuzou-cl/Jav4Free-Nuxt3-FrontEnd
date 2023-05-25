@@ -31,6 +31,21 @@
         font-size: 12px;
     }
 
+    .container-scene {
+    
+        .info {
+            font-size: 10px;
+        }
+        
+        .info-categories {
+            font-size: 8px;
+        }
+        
+        .info-idols {
+            font-size: 9px;
+        }
+    }
+
 }
 
 /* Landscape phones and down */
@@ -42,9 +57,9 @@
             color: #FFF !important;
         }
     }
-    
+
     //Pagination
-    .pages-number{
+    .pages-number {
         display: none;
     }
 

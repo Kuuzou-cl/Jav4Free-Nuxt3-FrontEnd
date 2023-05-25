@@ -5,15 +5,47 @@
                 <h6>{{ getScene.Scene[0].title }}</h6>
             </div>
         </div>
-        <div class="container">
+        <div class="container container-scene">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 px-0">
                     <video id="scene_player">
                         <source :src="getScene.Scene[0].video" title='720p' type="video/mp4" />
                         <source :src="getScene.Scene[0].video480p" title='480p' type="video/mp4" />
                     </video>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ps-0">
+                    <img :src="getScene.Jav[0].image" />
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <div class="row">
+                        <p class="info">{{ getScene.Scene[0].code }} - {{ getScene.Scene[0].title }}</p>
+                    </div>
+                    <div class="row">
+                        <p class="info">Categories</p>
+                    </div>
+                    <div class="row">
+                        <div v-for="category in getScene.Categories" :key="category.id"
+                            v-bind:class="getColumnsCategoriesIdols()">
+                            <NuxtLink :to="'/categories/' + category.name + '/1'" class="info-categories">
+                                <p>{{ category.name }}</p>
+                            </NuxtLink>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="info">Idols</p>
+                    </div>
+                    <div class="row">
+                        <div v-for="idol in getScene.Idols" :key="idol.id" v-bind:class="getColumnsCategoriesIdols()">
+                            <NuxtLink :to="'/idols/' + idol.name + '/1'" class="info-idols">
+                                <p>{{ idol.name }}</p>
+                            </NuxtLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="row row-title my-2 py-1">
             <div class="col-lg-12 text-center">
@@ -72,5 +104,14 @@ const getColumnsScenes = () => {
         return 'col-lg-3 col-md-3 col-sm-3 col-xs-3'
     }
 };
+
+const getColumnsCategoriesIdols = () => {
+    if (isTablet || isMobile) {
+        return 'col-lg-4 col-md-4 col-sm-4 col-xs-4'
+    } else {
+        return 'col-lg-2 col-md-2 col-sm-2 col-xs-2'
+    }
+};
+
 
 </script>
