@@ -67,6 +67,30 @@ video {
     background-color: #141414;
 }
 
+.btn-base {
+    color: #fff;
+    background-color: #141414;
+    border-color: #141414;
+}
+
+.btn-base:hover {
+    color: #fff;
+    background-color: #141414;
+    border-color: #141414;
+}
+
+.dropdown-base {
+    background-color: #141414;
+
+    .dropdown-item {
+        color: #fff;
+    }
+
+    .dropdown-item:hover {
+        color: #141414 !important;
+    }
+}
+
 //Category Page
 .category-title {
     color: #fff !important;
@@ -521,7 +545,7 @@ footer {
         text-transform: uppercase;
         font-weight: bold;
     }
-    
+
     .info-categories {
         transition: all linear 0.25s;
         font-size: 10px;
@@ -532,7 +556,7 @@ footer {
         background-color: #ff5858;
         text-align: center;
     }
-    
+
     .info-idols {
         transition: all linear 0.25s;
         font-size: 10px;

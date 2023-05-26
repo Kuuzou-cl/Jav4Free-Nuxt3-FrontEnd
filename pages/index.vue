@@ -52,7 +52,7 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <NuxtLink :to="'/scenes/1'" class="btn btn-more">
+            <NuxtLink :to="'/scenes/1/Latest'" class="btn btn-more">
               watch more AV scenes
             </NuxtLink>
           </div>

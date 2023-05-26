@@ -8,11 +8,11 @@
         <div class="container">
             <div class="row">
                 <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    <button class="btn btn-base btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ actualOrder }}
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu dropdown-base" aria-labelledby="dropdownMenuButton1">
                         <li v-for="(order, index) in getOrders(actualOrder)" :key="index">
                             <a class="dropdown-item" :href="'/scenes/1/' + order" >{{ order }}</a>
                         </li>
@@ -31,17 +31,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/scenes/' + page">Previous</a></li>
+                            <li v-else><a :href="'/scenes/' + page + '/' + actualOrder">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/scenes/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/scenes/' + prevPage + '/' + actualOrder">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/scenes/' + page">{{ page }}</a></li>
+                            <li class="active"><a :href="'/scenes/' + page + '/' + actualOrder">{{ page }}</a></li>
                             <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, allScenes.meta.lastPage)"
                                 :key="index">
-                                <a :href="'/scenes/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/scenes/' + nextPage + '/' + actualOrder">{{ nextPage }}</a>
                             </li>
                             <li v-if="page < allScenes.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/scenes/' + page">Next</a></li>
+                            <li v-else><a :href="'/scenes/' + page + '/' + actualOrder">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,12 +71,12 @@ actualOrder = actualOrder.charAt(0).toUpperCase() + actualOrder.slice(1);
 const { data: allScenes } = await useFetch('https://jav.souzou.dev/scenes/v2?page=' + page + '&order=' + actualOrder);
 
 const nextClick = () => {
-    let nextPage = '/scenes/' + (parseInt(page) + 1);
+    let nextPage = '/scenes/' + (parseInt(page) + 1) + '/' + actualOrder;
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/scenes/' + (parseInt(page) - 1);
+    let prevPage = '/scenes/' + (parseInt(page) - 1) + '/' + actualOrder;
     return prevPage;
 };
 

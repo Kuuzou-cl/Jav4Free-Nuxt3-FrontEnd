@@ -5,7 +5,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-2">
                         <div class="nav-container px-2">
-                            <NuxtLink to="/scenes/1" tag="a" class="nav-link text" data-text="Scenes">
+                            <NuxtLink to="/scenes/1/Latest" tag="a" class="nav-link text" data-text="Scenes">
                                 Scenes
                             </NuxtLink>
                         </div>
