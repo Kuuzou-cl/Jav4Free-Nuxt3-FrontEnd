@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid ">
+    <SearchBar />
     <div class="row row-title my-2 py-1">
       <div class="col-lg-12 text-center">
         <h6>Newest AV Added</h6>
