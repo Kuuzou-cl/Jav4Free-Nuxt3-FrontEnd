@@ -12,11 +12,9 @@ export default defineNuxtConfig({
     },    
   },
   runtimeConfig: {
-    // The private keys which are only available server-side
-    apiSecret: '123',
-    // Keys within public are also exposed client-side
     public: {
-      apiBase: '/api'
+      google_analytics_id: 'GTM-55BGRFG',
+      appEnv: 'production'
     }
   },
   css: ['~/assets/scss/main.scss','~/assets/scss/main-mobile.scss'],

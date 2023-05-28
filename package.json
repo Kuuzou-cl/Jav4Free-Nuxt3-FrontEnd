@@ -20,6 +20,7 @@
     "sass-loader": "^13.2.2"
   },
   "dependencies": {
+    "@gtm-support/vue-gtm": "^2.0.0",
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3"
   }
