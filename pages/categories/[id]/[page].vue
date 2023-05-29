@@ -59,12 +59,12 @@ useHead({
 })
 
 const nextClick = () => {
-    let nextPage = '/scenes/' + (parseInt(page) + 1);
+    let nextPage = '/categories/' + id + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/scenes/' + (parseInt(page) - 1);
+    let prevPage = '/categories/' + id + (parseInt(page) - 1);
     return prevPage;
 };
 
