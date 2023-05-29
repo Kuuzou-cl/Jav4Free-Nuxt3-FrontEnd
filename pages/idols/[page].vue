@@ -40,6 +40,13 @@ const route = useRoute();
 const { isMobile, isTablet } = useDevice();
 let page = route.params.page;
 
+useHead({
+  title: "Search for your favorite Idol on Jav4Free | Japanese Adult Videos for Free",
+  meta: [
+    { name: 'description', content: 'Jav4Free, Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality.' }
+  ]
+})
+
 if (page == null || page == "" || page < 1) {
     page = "1";
 }

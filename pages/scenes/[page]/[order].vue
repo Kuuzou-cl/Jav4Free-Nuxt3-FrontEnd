@@ -64,6 +64,15 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
+useHead({
+    title: "All Videos | Jav4Free | Japanese Adult Videos for Free",
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, Uploads every day, free streaming videos, Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
+
 let actualOrder = order;
 actualOrder = actualOrder.toLowerCase();
 actualOrder = actualOrder.charAt(0).toUpperCase() + actualOrder.slice(1);

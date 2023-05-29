@@ -17,17 +17,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/search/' + query + '/' + page ">Previous</a></li>
+                            <li v-else><a :href="'/search/' + query + '/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/search/' + query + '/' + prevPage ">{{ prevPage }}</a>
+                                <a :href="'/search/' + query + '/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/search/' + query + '/' + page ">{{ page }}</a></li>
+                            <li class="active"><a :href="'/search/' + query + '/' + page">{{ page }}</a></li>
                             <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, searchData.meta.lastPage)"
                                 :key="index">
-                                <a :href="'/search/' + query + '/' + nextPage ">{{ nextPage }}</a>
+                                <a :href="'/search/' + query + '/' + nextPage">{{ nextPage }}</a>
                             </li>
                             <li v-if="page < searchData.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/search/' + query + '/' + page ">Next</a></li>
+                            <li v-else><a :href="'/search/' + query + '/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -45,18 +45,27 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
+useHead({
+    title: '"' + query + '" | Jav4Free | Watch Adult Porn Videos ',
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, watch , Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
+
 const { isMobile, isTablet } = useDevice();
 
 const { data: searchData } = await useFetch('https://jav.souzou.dev/search/v2?title=' + query + '&page=' + page);
 
 
 const nextClick = () => {
-    let nextPage = '/search/' + query + '/' + (parseInt(page) + 1) ;
+    let nextPage = '/search/' + query + '/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/search/' + query + '/' + (parseInt(page) - 1) ;
+    let prevPage = '/search/' + query + '/' + (parseInt(page) - 1);
     return prevPage;
 };
 

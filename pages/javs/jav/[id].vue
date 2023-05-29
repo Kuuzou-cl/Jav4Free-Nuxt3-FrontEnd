@@ -73,6 +73,19 @@ const id = route.params.id;
 const { data: JavData } = await useFetch('https://jav.souzou.dev/javs/javv2?code=' + id);
 const { data: getRelatedJavs } = await useFetch("https://jav.souzou.dev/javs/relatedJavsv2?id=" + JavData._rawValue.Jav[0].id + "&limit=" + 4);
 
+useHead({
+    title: JavData._rawValue.Jav[0].code + " | Jav4Free | " + JavData._rawValue.Jav[0].title,
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, watch " +
+                JavData._rawValue.Jav[0].code +
+                " , " +
+                JavData._rawValue.Jav[0].title +
+                " , Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
+
 const getColumnsScenes = () => {
     if (isMobile || isTablet) {
         return 'col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-center'

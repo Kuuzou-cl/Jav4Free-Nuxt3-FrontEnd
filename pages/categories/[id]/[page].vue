@@ -47,6 +47,17 @@ if (page == null || page == "" || page < 1) {
 
 const { data: CategoryData } = await useFetch('https://jav.souzou.dev/categories/scenesv2?page=' + page + '&name=' + id + '&order=desc');
 
+useHead({
+    title: "Watch the latest porn videos in the " + id + " category | Jav4Free",
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, Here you can watch" +
+                id +
+                " porn videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
+
 const nextClick = () => {
     let nextPage = '/scenes/' + (parseInt(page) + 1);
     return nextPage;

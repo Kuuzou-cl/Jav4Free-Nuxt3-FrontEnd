@@ -52,6 +52,17 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
+useHead({
+    title: id + " Porn Videos | Jav4Free",
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, Here you can watch every porn video of " +
+                id +
+                ", find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
+
 const { data: IdolData } = await useFetch('https://jav.souzou.dev/idols/scenesv2?page=' + page + '&name=' + id + '&order=desc');
 
 
