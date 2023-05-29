@@ -1,7 +1,7 @@
-/*import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin } from '#app'
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-    const cookieEmail = useCookie('email');
+    /*const cookieEmail = useCookie('email');
     const cookieToken = useCookie('token');
     const config = useRuntimeConfig();
 
@@ -20,6 +20,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }else{
         console.log("not user log in!");
     }
+    */
 })
 
-*/
