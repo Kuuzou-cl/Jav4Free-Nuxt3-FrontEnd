@@ -49,11 +49,19 @@ useHead({
     ]
 })
 
+if (isNaN(page)) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
 if (page == null || page == "" || page < 1) {
-    page = "1";
+    page = 1;
 }
 
 const { data: allJavs } = await useFetch('https://jav.souzou.dev/javs/v2?page=' + page + '&order=desc');
+
+if (allJavs._rawValue.Javs.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
 const nextClick = () => {
     let nextPage = '/javs/' + (parseInt(page) + 1);

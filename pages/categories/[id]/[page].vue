@@ -41,11 +41,19 @@ let page = route.params.page;
 let id = route.params.id;
 const { isMobile, isTablet } = useDevice();
 
+if (isNaN(page) || !id || id.trim().length === 0) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
 if (page == null || page == "" || page < 1) {
-    page = "1";
+    page = 1;
 }
 
 const { data: CategoryData } = await useFetch('https://jav.souzou.dev/categories/scenesv2?page=' + page + '&name=' + id + '&order=desc');
+
+if (CategoryData._rawValue.Scenes.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
 useHead({
     title: "Watch the latest porn videos in the " + id + " category | Jav4Free",

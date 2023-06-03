@@ -48,9 +48,14 @@ let id = route.params.id;
 let page = route.params.page;
 const { isMobile, isTablet } = useDevice();
 
-if (page == null || page == "" || page < 1) {
-    page = "1";
+if (isNaN(page) || !id || id.trim().length === 0) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
+
+if (page == null || page == "" || page < 1) {
+    page = 1;
+}
+
 
 useHead({
     title: id + " Porn Videos | Jav4Free",
@@ -65,6 +70,9 @@ useHead({
 
 const { data: IdolData } = await useFetch('https://jav.souzou.dev/idols/scenesv2?page=' + page + '&name=' + id + '&order=desc');
 
+if (IdolData._rawValue.Idol.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
 const nextClick = () => {
     let nextPage = '/idols/' + id + '/' + (parseInt(page) + 1);

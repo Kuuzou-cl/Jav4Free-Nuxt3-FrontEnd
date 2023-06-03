@@ -41,17 +41,26 @@ const { isMobile, isTablet } = useDevice();
 let page = route.params.page;
 
 useHead({
-  title: "Search for your favorite Idol on Jav4Free | Japanese Adult Videos for Free",
-  meta: [
-    { name: 'description', content: 'Jav4Free, Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality.' }
-  ]
+    title: "Search for your favorite Idol on Jav4Free | Japanese Adult Videos for Free",
+    meta: [
+        { name: 'description', content: 'Jav4Free, Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality.' }
+    ]
 })
 
-if (page == null || page == "" || page < 1) {
-    page = "1";
+if (isNaN(page)) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
 
+if (page == null || page == "" || page < 1) {
+    page = 1;
+}
+
+
 const { data: allIdols } = await useFetch('https://jav.souzou.dev/idols/v2?page=' + page + '&order=desc');
+
+if (allIdols._rawValue.Idols.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
 const nextClick = () => {
     let nextPage = '/idols/' + (parseInt(page) + 1);
@@ -126,10 +135,10 @@ const getColumnsIdols = () => {
     } else {
         if (isTablet) {
             return 'col-lg-4 col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center'
-        }else{
+        } else {
             return 'col-lg-2 d-flex justify-content-center'
         }
-        
+
     }
 };
 </script>

@@ -56,12 +56,16 @@ const { isMobile, isTablet } = useDevice();
 let page = route.params.page;
 let order = route.params.order;
 
-if (order == null || order == "") {
+if (isNaN(page) || !order || order.trim().length === 0) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
+if (order != "Latest" && order != "Trending" && order != "Top view" && order != "Oldest") {
     order = "Latest";
 }
 
 if (page == null || page == "" || page < 1) {
-    page = "1";
+    page = 1;
 }
 
 useHead({
@@ -78,6 +82,10 @@ actualOrder = actualOrder.toLowerCase();
 actualOrder = actualOrder.charAt(0).toUpperCase() + actualOrder.slice(1);
 
 const { data: allScenes } = await useFetch('https://jav.souzou.dev/scenes/v2?page=' + page + '&order=' + actualOrder);
+
+if (allScenes._rawValue.Scenes.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
 const nextClick = () => {
     let nextPage = '/scenes/' + (parseInt(page) + 1) + '/' + actualOrder;

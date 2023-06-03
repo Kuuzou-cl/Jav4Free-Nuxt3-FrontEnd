@@ -69,6 +69,10 @@ const route = useRoute();
 const { isMobile, isTablet } = useDevice();
 let id = route.params.id;
 
+if ( !id || id.trim().length === 0) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
 let limitRelated = 8;
 
 if (isMobile) {
@@ -76,6 +80,9 @@ if (isMobile) {
 }
 
 const { data: getScene } = await useFetch('https://jav.souzou.dev/scenes/scenev2?code=' + id);
+if (getScene._rawValue.Scene.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 const { data: getRelatedScene } = await useFetch("https://jav.souzou.dev/scenes/relatedScenesv2?id=" + getScene._rawValue.Scene[0].id + "&limit=" + limitRelated);
 const view = await useFetch('https://jav.souzou.dev/scenes/newViewv2?id=' + getScene._rawValue.Scene[0].id);
 

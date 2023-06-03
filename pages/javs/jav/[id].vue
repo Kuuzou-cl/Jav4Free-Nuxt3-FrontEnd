@@ -70,7 +70,15 @@ const route = useRoute();
 const { isMobile, isTablet } = useDevice();
 const id = route.params.id;
 
+if (!id || id.trim().length === 0) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
 const { data: JavData } = await useFetch('https://jav.souzou.dev/javs/javv2?code=' + id);
+if (JavData._rawValue.Jav.length == 0) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
 const { data: getRelatedJavs } = await useFetch("https://jav.souzou.dev/javs/relatedJavsv2?id=" + JavData._rawValue.Jav[0].id + "&limit=" + 4);
 
 useHead({
