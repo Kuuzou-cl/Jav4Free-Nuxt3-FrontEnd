@@ -15,19 +15,19 @@
         <li class="nav-item">
             <NuxtLink to="/dashboard/uploadFile" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-cloud-arrow-up" />
-                <span>Upload</span>
+                <span>--Upload</span>
             </NuxtLink>
         </li>
         <hr class="sidebar-divider" />
         <div class="sidebar-heading">New Content</div>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/newJav" class="nav-link">
+            <NuxtLink to="/dashboard/javs/new" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
                 <span>New Jav</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/newScene" class="nav-link">
+            <NuxtLink to="/dashboard/scenes/new" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
                 <span>New Scene</span>
             </NuxtLink>
@@ -35,13 +35,13 @@
         <li class="nav-item">
             <NuxtLink to="/dashboard/newIdol" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
-                <span>New Idol</span>
+                <span>--New Idol</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
             <NuxtLink to="/dashboard/newCategory" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
-                <span>New Category</span>
+                <span>--New Category</span>
             </NuxtLink>
         </li>
         <!-- Divider -->
@@ -49,7 +49,7 @@
         <!-- Heading -->
         <div class="sidebar-heading">Data Center</div>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/editJavs" class="nav-link">
+            <NuxtLink to="/dashboard/javs/1" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-film" />
                 <span>Javs</span>
             </NuxtLink>
@@ -63,13 +63,13 @@
         <li class="nav-item">
             <NuxtLink to="/dashboard/editIdols" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-person-dress" />
-                <span>Idols</span>
+                <span>--Idols</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
             <NuxtLink to="/dashboard/editCategories" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-tags" />
-                <span>Categories</span>
+                <span>--Categories</span>
             </NuxtLink>
         </li>
         <!-- Divider -->
@@ -77,7 +77,7 @@
         <li class="nav-item">
             <NuxtLink to="/dashboard/awsFiles" class="nav-link">
                 <font-awesome-icon icon="fa-brands fa-aws" />
-                <span>Files</span>
+                <span>--Files</span>
             </NuxtLink>
         </li>
         <hr class="sidebar-divider d-none d-md-block" />

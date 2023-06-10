@@ -78,11 +78,11 @@
                                     <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
                                 </td>
                                 <td>
-                                    <nuxt-link to="/dashboard"
+                                    <nuxt-link :to="'/dashboard/scenes/edit/'+scene.id"
                                         class="btn button-admin">Edit</nuxt-link>
                                 </td>
                                 <td>
-                                    <button @click="deleteJav(scene._id)" class="btn button-admin">
+                                    <button class="btn button-admin">
                                         Delete
                                     </button>
                                 </td>
@@ -112,7 +112,7 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
-const { data: allScenes } = await useFetch('http://localhost:3000/aws/stateFiles?page=' + page);
+const { data: allScenes } = await useFetch('https://jav.souzou.dev/aws/stateFiles?page=' + page);
 
 const nextClick = () => {
     let nextPage = '/dashboard/scenes/' + (parseInt(page) + 1) ;
