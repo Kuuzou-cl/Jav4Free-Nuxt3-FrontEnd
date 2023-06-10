@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row row-title my-2 py-1">
             <div class="col-lg-12 text-center">
-                <h6>All Scenes</h6>
+                <h6>All JAVs</h6>
             </div>
         </div>
         <div class="container">      
@@ -16,11 +16,11 @@
                                 <a :href="'/dashboard/scenes/' + prevPage">{{ prevPage }}</a>
                             </li>
                             <li class="active"><a :href="'/dashboard/scenes'">{{ page }}</a></li>
-                            <li v-for="(nextPage, index) in nextPages(page, allScenes.meta.lastPage)"
+                            <li v-for="(nextPage, index) in nextPages(page, allJavs.meta.lastPage)"
                                 :key="index">
                                 <a :href="'/dashboard/scenes/' + nextPage ">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allScenes.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-if="page < allJavs.meta.lastPage"><a :href="nextClick()">Next</a></li>
                             <li v-else><a :href="'/dashboard/scenes/' + page ">Next</a></li>
                         </ul>
                     </div>
@@ -33,52 +33,22 @@
                             <tr>
                                 <th>Code</th>
                                 <th>Hide</th>
-                                <th>720p</th>
-                                <th>480p</th>
-                                <th>Preview</th>
-                                <th>Static</th>
-                                <th>Vtt</th>
-                                <th>Sprite</th>
+                                <th>Cover</th>
                                 <th>Edit</th>
                                 <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="scene in allScenes.Scenes" :key="scene.id">
-                                <th>{{ scene.code }}</th>
-                                <td>{{ scene.hide }}</td>
+                            <tr v-for="jav in allJavs.Javs" :key="jav.id">
+                                <th>{{ jav.code }}</th>
+                                <td>{{ jav.hide }}</td>
                                 <td>
-                                    <font-awesome-icon v-if="scene.video720p != 'false'" icon="fa-solid fa-check"
+                                    <font-awesome-icon v-if="jav.imageCover != 'false'" icon="fa-solid fa-check"
                                         class="icon-green" />
                                     <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
+                                </td>                                
                                 <td>
-                                    <font-awesome-icon v-if="scene.video480p != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
-                                <td>
-                                    <font-awesome-icon v-if="scene.videoPreview != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
-                                <td>
-                                    <font-awesome-icon v-if="scene.videoStatic != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
-                                <td>
-                                    <font-awesome-icon v-if="scene.videoVtt != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
-                                <td>
-                                    <font-awesome-icon v-if="scene.videoSprite != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>
-                                <td>
-                                    <nuxt-link :to="'/dashboard/scenes/edit/'+scene.id"
+                                    <nuxt-link :to="'/dashboard/scenes/edit/'+jav.id"
                                         class="btn button-admin">Edit</nuxt-link>
                                 </td>
                                 <td>
@@ -112,7 +82,7 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
-const { data: allScenes } = await useFetch('https://jav.souzou.dev/aws/stateFiles/scenes/?page=' + page);
+const { data: allJavs } = await useFetch('https://jav.souzou.dev/aws/stateFiles/javs/?page=' + page);
 
 const nextClick = () => {
     let nextPage = '/dashboard/scenes/' + (parseInt(page) + 1) ;
