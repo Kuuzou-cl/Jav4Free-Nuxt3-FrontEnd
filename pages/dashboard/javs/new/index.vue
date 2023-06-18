@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-lg-12 d-flex justify-content-center">
                             <img class="preview-img-jav" ref="imgCodePreview"
-                                :src="'https://d27vxor1f495av.cloudfront.net/javs/' + newJAVCode + '.jpg'" />
+                                :src="imgPreview" />
                         </div>
                         <button class="btn btn-warning" @click="changeUrlImg()">
                             Reload Cover
@@ -79,8 +79,8 @@
             </div>
             <div class="row my-2">
                 <div class="col-lg-12 d-flex justify-content-center">
-                    <button class="btn btn-success" @click="postScene()">
-                        Add Scene
+                    <button class="btn btn-success" @click="postJav()">
+                        Add JAV
                     </button>
                 </div>
             </div>

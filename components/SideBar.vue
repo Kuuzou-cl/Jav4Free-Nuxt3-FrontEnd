@@ -33,15 +33,15 @@
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/newIdol" class="nav-link">
+            <NuxtLink to="/dashboard/idols/new" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
-                <span>--New Idol</span>
+                <span>New Idol</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/newCategory" class="nav-link">
+            <NuxtLink to="/dashboard/categories/new" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
-                <span>--New Category</span>
+                <span>New Category</span>
             </NuxtLink>
         </li>
         <!-- Divider -->
@@ -61,15 +61,15 @@
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/editIdols" class="nav-link">
+            <NuxtLink to="/dashboard/idols/1" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-person-dress" />
-                <span>--Idols</span>
+                <span>Idols</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/editCategories" class="nav-link">
+            <NuxtLink to="/dashboard/categories/1" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-tags" />
-                <span>--Categories</span>
+                <span>Categories</span>
             </NuxtLink>
         </li>
         <!-- Divider -->

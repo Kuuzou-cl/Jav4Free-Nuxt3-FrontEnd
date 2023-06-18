@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row row-title my-2 py-1">
             <div class="col-lg-12 text-center">
-                <h6>All JAVs</h6>
+                <h6>All idols</h6>
             </div>
         </div>
         <div class="container">      
@@ -11,17 +11,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/dashboard/javs/' + page">Previous</a></li>
+                            <li v-else><a :href="'/dashboard/idols/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/dashboard/javs/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/dashboard/idols/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/dashboard/javs/' + page">{{ page }}</a></li>
-                            <li v-for="(nextPage, index) in nextPages(page, allJavs.meta.lastPage)"
+                            <li class="active"><a :href="'/dashboard/idols/'+page">{{ page }}</a></li>
+                            <li v-for="(nextPage, index) in nextPages(page, allIdols.meta.lastPage)"
                                 :key="index">
-                                <a :href="'/dashboard/javs/' + nextPage ">{{ nextPage }}</a>
+                                <a :href="'/dashboard/idols/' + nextPage ">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allJavs.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/dashboard/javs/' + page ">Next</a></li>
+                            <li v-if="page < allIdols.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-else><a :href="'/dashboard/idols/' + page ">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,24 +31,22 @@
                     <table id="example" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Hide</th>
-                                <th>Cover</th>
+                                <th>Name</th>
+                                <th>Image</th>
                                 <th>Edit</th>
                                 <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="jav in allJavs.Javs" :key="jav.id">
-                                <th>{{ jav.code }}</th>
-                                <td>{{ jav.hide }}</td>
+                            <tr v-for="idol in allIdols.Idols" :key="idol.id">
+                                <th>{{ idol.name }}</th>
                                 <td>
-                                    <font-awesome-icon v-if="jav.imageCover != 'false'" icon="fa-solid fa-check"
+                                    <font-awesome-icon v-if="idol.image != 'false'" icon="fa-solid fa-check"
                                         class="icon-green" />
                                     <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
                                 </td>                                
                                 <td>
-                                    <nuxt-link :to="'/dashboard/javs/edit/'+jav.id"
+                                    <nuxt-link :to="'/dashboard/idols/edit/'+idol.id"
                                         class="btn button-admin">Edit</nuxt-link>
                                 </td>
                                 <td>
@@ -82,21 +80,16 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
-const { data: allJavs } = await useFetch('https://jav.souzou.dev/aws/stateFiles/javs/?page=' + page);
+const { data: allIdols } = await useFetch('https://jav.souzou.dev/aws/stateFiles/idols/?page=' + page);
 
 const nextClick = () => {
-    let nextPage = '/dashboard/javs/' + (parseInt(page) + 1) ;
+    let nextPage = '/dashboard/idols/' + (parseInt(page) + 1) ;
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/dashboard/javs/' + (parseInt(page) - 1) ;
+    let prevPage = '/dashboard/idols/' + (parseInt(page) - 1) ;
     return prevPage;
-};
-
-const pushPage = (page) => {
-    let newPage = parseInt(page);
-    navigateTo('/javs/' + newPage);
 };
 
 const previousPages = (page) => {
