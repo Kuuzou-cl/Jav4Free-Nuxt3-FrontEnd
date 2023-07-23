@@ -170,8 +170,9 @@ const changeUrlImg = async () => {
 
 const updateJav = async () => {
     const cookieToken = useCookie('token');
+    const cookieBearer = 'Bearer ' + cookieToken.value;
     const myHeaders = new Headers();
-    myHeaders.append("authorization", cookieToken.value);
+    myHeaders.append("authorization", cookieBearer);
 
     let tempCategories = [];
     newJAVCategories._rawValue.forEach(element => {
@@ -208,6 +209,11 @@ const updateJav = async () => {
             scenes: tempScenes
         }
     })
+
+    reloadNuxtApp({
+        path: "/dashboard/javs/1",
+        ttl: 1000, // default 10000
+    });
 
 };
 

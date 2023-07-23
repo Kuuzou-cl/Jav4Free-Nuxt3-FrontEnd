@@ -32,8 +32,7 @@
                 <div class="col-lg-6 d-flex justify-content-center">
                     <div class="row">
                         <div class="col-lg-12 d-flex justify-content-center">
-                            <img class="preview-img-jav" ref="imgCodePreview"
-                                :src="imgPreview" />
+                            <img class="preview-img-jav" ref="imgCodePreview" :src="imgPreview" />
                         </div>
                         <button class="btn btn-warning" @click="changeUrlImg()">
                             Reload Cover
@@ -128,8 +127,9 @@ const changeUrlImg = async () => {
 
 const postJav = async () => {
     const cookieToken = useCookie('token');
+    const cookieBearer = 'Bearer ' + cookieToken.value;
     const myHeaders = new Headers();
-    myHeaders.append("authorization", cookieToken.value);
+    myHeaders.append("authorization", cookieBearer);
 
     let tempCategories = [];
     newJAVCategories._rawValue.forEach(element => {
@@ -157,6 +157,11 @@ const postJav = async () => {
             idols: tempIdols
         }
     })
+
+    reloadNuxtApp({
+        path: "/dashboard/javs/1",
+        ttl: 1000, // default 10000
+    });
 
 };
 
