@@ -130,6 +130,15 @@ const { data: dataJav } = await useFetch('https://jav.souzou.dev/javs/javIdv2?id
 let newJAVTitle = dataJav._rawValue.Jav.title;
 let newJAVCode = dataJav._rawValue.Jav.code;
 let newJAVHide = dataJav._rawValue.Jav.hide;
+
+console.log(dataJav._rawValue.Jav.hide)
+
+if (dataJav._rawValue.Jav.hide == 1) {
+    newJAVHide = true;
+} else {
+    newJAVHide = false;
+}
+
 imgPreview = "https://d27vxor1f495av.cloudfront.net/javs/" + newJAVCode + ".jpg";
 
 
@@ -177,23 +186,30 @@ const updateJav = async () => {
     let tempCategories = [];
     newJAVCategories._rawValue.forEach(element => {
         if (element.selected) {
-            tempCategories.push(element.id);
+            console.log(element.selected);
+            tempCategories.push(element);
         }
     });
 
     let tempIdols = [];
     newJAVIdols._rawValue.forEach(element => {
         if (element.selected) {
-            tempIdols.push(element.id);
+            tempIdols.push(element);
         }
     });
 
     let tempScenes = [];
     newJAVScenes._rawValue.forEach(element => {
         if (element.selected) {
-            tempScenes.push(element.id);
+            tempScenes.push(element);
         }
     });
+
+    let tempJAVHide = 0;
+
+    if (newJAVHide) {
+        tempJAVHide = 1;
+    }
 
     const { data, error } = await useFetch('https://jav.souzou.dev/javs/updateJavv2', {
         method: 'PATCH',
@@ -203,7 +219,7 @@ const updateJav = async () => {
             title: newJAVTitle,
             code: newJAVCode,
             image: imgPreview,
-            hide: newJAVHide,
+            hide: tempJAVHide,
             categories: tempCategories,
             idols: tempIdols,
             scenes: tempScenes
