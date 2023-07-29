@@ -135,8 +135,9 @@ const changeUrlVideo = async () => {
 
 const postScene = async () => {
     const cookieToken = useCookie('token');
+    const cookieBearer = 'Bearer ' + cookieToken.value;
     const myHeaders = new Headers();
-    myHeaders.append("authorization", cookieToken.value);
+    myHeaders.append("authorization", cookieBearer);
 
     let tempCategories = [];
     newSceneCategories._rawValue.forEach(element => {

@@ -74,8 +74,9 @@ const changeUrlImg = async () => {
 
 const postIdol = async () => {
     const cookieToken = useCookie('token');
+    const cookieBearer = 'Bearer ' + cookieToken.value;
     const myHeaders = new Headers();
-    myHeaders.append("authorization", cookieToken.value);
+    myHeaders.append("authorization", cookieBearer);
 
     const { data, error } = await useFetch('https://jav.souzou.dev/idols/updateIdolv2', {
         method: 'PATCH',
