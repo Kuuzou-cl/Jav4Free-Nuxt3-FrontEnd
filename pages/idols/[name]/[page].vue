@@ -2,13 +2,22 @@
     <div class="container-fluid">
         <div class="row row-title my-2 py-1">
             <div class="col-lg-12 text-center">
-                <h6>JAV IDOLS</h6>
+                <h6>{{ IdolData.Idol.name }} | JAV Idol</h6>
             </div>
         </div>
         <div class="container">
             <div class="row my-2">
-                <div v-for="idol in allIdols.Idols" :key="idol.id" v-bind:class="getColumnsIdols()">
-                    <CardIdol v-bind:data="idol" />
+                <div class="col-lg-2 d-flex justify-content-center">
+                    <CardIdol v-bind:data="IdolData.Idol" />
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div v-for="jav in IdolData.Javs" :key="jav.id" v-bind:class="getColumnsScenes()">
+                            <CardJav v-bind:data="jav" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mt-4">
@@ -16,17 +25,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/idols/' + page">Previous</a></li>
+                            <li v-else><a :href="'/idols/' + name + '/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/idols/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/idols/' + name + '/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/idols/' + page">{{ page }}</a></li>
-                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, allIdols.meta.lastPage)"
+                            <li class="active"><a :href="'/idols/' + name + '/' + page">{{ page }}</a></li>
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, IdolData.meta.lastPage)"
                                 :key="index">
-                                <a :href="'/idols/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/idols/' + name + '/' + nextPage">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allIdols.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/idols/' + page">Next</a></li>
+                            <li v-if="page < IdolData.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-else><a :href="'/idols/' + name + '/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,20 +46,14 @@
 
 <script setup>
 const route = useRoute();
-const { isMobile, isTablet } = useDevice();
+let name = route.params.name;
 let page = route.params.page;
+const { isMobile, isTablet } = useDevice();
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-useHead({
-    title: "Search for your favorite Idol on Jav4Free | Japanese Adult Videos for Free",
-    meta: [
-        { name: 'description', content: 'Jav4Free, Here you can find almost every Idol and Actress of japanese adult videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality.' }
-    ]
-})
-
-if (isNaN(page)) {
+if (isNaN(page) || !name || name.trim().length === 0) {
     throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
 
@@ -59,25 +62,31 @@ if (page == null || page == "" || page < 1) {
 }
 
 
-const { data: allIdols } = await useFetch(api + '/idols/getidolbypage?page=' + page + '&order=desc');
+useHead({
+    title: name + " Porn Videos | Jav4Free",
+    meta: [
+        {
+            name: 'description', content: "Jav4Free, Here you can watch every porn video of " +
+                name +
+                ", find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
+        }
+    ]
+})
 
-if (allIdols._rawValue.Idols.length == 0) {
+const { data: IdolData } = await useFetch(api + '/idols/getjavbyidol?page=' + page + '&name=' + name + '&order=desc');
+
+if (!IdolData._rawValue.Idol) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 
 const nextClick = () => {
-    let nextPage = '/idols/' + (parseInt(page) + 1);
+    let nextPage = '/idols/' + name + '/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/idols/' + (parseInt(page) - 1);
+    let prevPage = '/idols/' + name + '/' + (parseInt(page) - 1);
     return prevPage;
-};
-
-const pushPage = (page) => {
-    let newPage = parseInt(page);
-    navigateTo('/idols/' + newPage);
 };
 
 const previousPages = (page) => {
@@ -132,14 +141,14 @@ const nextPages = (page, lastPage) => {
 
 };
 
-const getColumnsIdols = () => {
+const getColumnsScenes = () => {
     if (isMobile) {
-        return 'col-lg-4 col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center'
+        return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
     } else {
         if (isTablet) {
-            return 'col-lg-4 col-md-4 col-sm-4 col-xs-4 d-flex justify-content-center'
+            return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
         } else {
-            return 'col-lg-2 d-flex justify-content-center'
+            return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
         }
 
     }

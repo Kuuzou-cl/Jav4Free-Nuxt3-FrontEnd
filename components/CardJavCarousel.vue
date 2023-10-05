@@ -1,7 +1,7 @@
 <template>
     <NuxtLink :to="'/javs/jav/' + props.data.code" class="movie">
         <div class="movie-hero">
-            <img :src="props.data.image" class="movie-img">
+            <img :src="props.data.poster" class="movie-img">
         </div>
         <div class="movie-content">
             <div class="movie-title">

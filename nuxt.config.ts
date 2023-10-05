@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     public: {
       google_analytics_id: 'GTM-55BGRFG',
       appEnv: 'production',
+      apiBase: process.env.API_BASE,
     }
   },
   css: ['~/assets/scss/main.scss', '~/assets/scss/main-mobile.scss', '@fortawesome/fontawesome-svg-core/styles.css'],

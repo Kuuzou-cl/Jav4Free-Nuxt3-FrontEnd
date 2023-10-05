@@ -7,8 +7,8 @@
         </div>
         <div class="container">
             <div class="row my-2">
-                <div v-for="scene in CategoryData.Scenes" :key="scene.id" v-bind:class="getColumnsScenes()">
-                    <CardScene v-bind:data="scene" />
+                <div v-for="jav in CategoryData.Javs" :key="jav.id" v-bind:class="getColumnsScenes()">
+                    <CardJav v-bind:data="jav" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -41,6 +41,9 @@ let page = route.params.page;
 let id = route.params.id;
 const { isMobile, isTablet } = useDevice();
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 if (isNaN(page) || !id || id.trim().length === 0) {
     throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
@@ -49,9 +52,9 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
-const { data: CategoryData } = await useFetch('https://jav.souzou.dev/categories/scenesv2?page=' + page + '&name=' + id + '&order=desc');
+const { data: CategoryData } = await useFetch(api + '/categories/getJavsByCategories?page=' + page + '&name=' + id + '&order=desc');
 
-if (CategoryData._rawValue.Scenes.length == 0) {
+if (CategoryData._rawValue.Javs.length == 0) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 
@@ -140,7 +143,7 @@ const getColumnsScenes = () => {
         if (isTablet) {
             return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
         } else {
-            return 'col-lg-3 col-md-3'
+            return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
         }
 
     }

@@ -40,6 +40,9 @@ const route = useRoute();
 const { isMobile, isTablet } = useDevice();
 let page = route.params.page;
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 useHead({
     title: "Recently Videos | Jav4Free | Japanese Adult Videos for Free",
     meta: [
@@ -57,9 +60,9 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
-const { data: allJavs } = await useFetch('https://jav.souzou.dev/javs/v2?page=' + page + '&order=desc');
+const { data: allJavs } = await useFetch(api + '/javs/getjavs?page=1&hide=0&variable=id&order=desc');
 
-if (allJavs._rawValue.Javs.length == 0) {
+if (allJavs._rawValue == null) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 

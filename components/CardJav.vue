@@ -1,11 +1,13 @@
 <template>
     <NuxtLink :to="'/javs/jav/' + props.data.code" class="movie my-2">
         <div class="movie-hero">
-            <img :src="props.data.image" class="movie-img">
+            <img :src="props.data.poster" class="movie-img">
         </div>
         <div class="movie-content">
             <div class="movie-title">
                 <h1 class="heading-primary">{{ props.data.code }}</h1>
+            </div>
+            <div class="movie-title">
                 <div class="movie-tag movie-tag-1">{{ props.data.categories[0].name }}</div>
                 <div class="movie-tag movie-tag-2">{{ props.data.categories[1].name }}</div>
                 <div class="movie-tag movie-tag-3">{{ props.data.categories[2].name }}</div>

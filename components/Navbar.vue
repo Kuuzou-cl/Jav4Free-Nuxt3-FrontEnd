@@ -5,15 +5,15 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item px-2">
                         <div class="nav-container px-2">
-                            <NuxtLink to="/scenes/1/Latest" tag="a" class="nav-link text" data-text="Scenes">
-                                Scenes
+                            <NuxtLink to="/recommended/1" tag="a" class="nav-link text" data-text="Recommended">
+                                Recommended
                             </NuxtLink>
                         </div>
                     </li>
                     <li class="nav-item px-2">
                         <div class="nav-container px-2">
-                            <NuxtLink to="/javs/1" tag="a" class="nav-link text" data-text="Movies">
-                                Movies
+                            <NuxtLink to="/javs/1" tag="a" class="nav-link text" data-text="Newest">
+                                Newest
                             </NuxtLink>
                         </div>
                     </li>

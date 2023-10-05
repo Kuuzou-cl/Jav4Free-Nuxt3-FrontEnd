@@ -140,7 +140,7 @@ video {
     .movie-content {
         background-color: #141414;
         flex: 1;
-        padding: 35px 30px;
+        padding: 30px 30px 15px 30px;
         display: flex;
         flex-direction: column;
     }
@@ -161,7 +161,7 @@ video {
     .movie-title {
         display: flex;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .heading-primary {
@@ -196,7 +196,7 @@ video {
     }
 
     .movie-description {
-        font-size: 14px;
+        font-size: 12px;
         color: #fff;
         letter-spacing: 1px;
     }
