@@ -123,6 +123,8 @@ video {
 .movie {
     padding: 0%;
     max-width: 1000px;
+    width: 100%;
+    height: auto;
     border-radius: 5px;
     display: flex;
     overflow: hidden;

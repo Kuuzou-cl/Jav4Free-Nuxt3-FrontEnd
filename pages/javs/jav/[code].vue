@@ -59,7 +59,7 @@ let code = route.params.code;
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-if ( !code || code.trim().length === 0) {
+if (!code || code.trim().length === 0) {
     throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
 
@@ -95,16 +95,17 @@ onMounted(() => {
             fillToContainer: false,
             preload: true,
             posterImage: getJav._rawValue.Jav.poster,
-            //timelinePreview: {
-            //    file: getJav._rawValue.Jav.vtt,
-            //    type: "VTT",
-            //},
+            timelinePreview: {
+                file: getJav._rawValue.Jav.vtt,
+                type: "VTT",
+            },
             allowTheatre: false,
             contextMenu: {
                 controls: false
             }
         },
     });
+
 });
 
 const getColumnsScenes = () => {
