@@ -60,7 +60,7 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
-const { data: allJavs } = await useFetch(api + '/javs/getjavs?page=1&hide=0&variable=id&order=desc');
+const { data: allJavs } = await useFetch(api + '/javs/getjavs?page='+page+'&hide=0&variable=id&order=desc');
 
 if (allJavs._rawValue == null) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
