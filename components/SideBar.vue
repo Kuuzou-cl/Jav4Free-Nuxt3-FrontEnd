@@ -27,12 +27,6 @@
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/scenes/new" class="nav-link">
-                <font-awesome-icon icon="fa-solid fa-square-plus" />
-                <span>New Scene</span>
-            </NuxtLink>
-        </li>
-        <li class="nav-item">
             <NuxtLink to="/dashboard/idols/new" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-square-plus" />
                 <span>New Idol</span>
@@ -55,19 +49,13 @@
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/scenes/1" class="nav-link">
-                <font-awesome-icon icon="fa-solid fa-ticket" />
-                <span>Scenes</span>
-            </NuxtLink>
-        </li>
-        <li class="nav-item">
             <NuxtLink to="/dashboard/idols/1" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-person-dress" />
                 <span>Idols</span>
             </NuxtLink>
         </li>
         <li class="nav-item">
-            <NuxtLink to="/dashboard/categories/1" class="nav-link">
+            <NuxtLink to="/dashboard/categories" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-tags" />
                 <span>Categories</span>
             </NuxtLink>

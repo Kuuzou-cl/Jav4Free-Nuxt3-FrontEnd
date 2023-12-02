@@ -33,8 +33,11 @@
 let email = '';
 let password = '';
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 const login = async () => {
-    const { data, error } = await useFetch('https://jav.souzou.dev/users/login', {
+    const { data, error } = await useFetch(api + '/users/login', {
         method: 'POST',
         body: { email, password }
     })

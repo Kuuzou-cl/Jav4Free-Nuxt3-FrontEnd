@@ -38,6 +38,9 @@ definePageMeta({
     layout: "admin",
 });
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 let newCategoryName = "";
 
 const postCategory = async () => {
@@ -46,13 +49,18 @@ const postCategory = async () => {
     const myHeaders = new Headers();
     myHeaders.append("authorization", cookieBearer);
 
-    const { data, error } = await useFetch('https://jav.souzou.dev/categories/newCategory', {
+    const { data, error } = await useFetch(api+'/categories/newCategory', {
         method: 'POST',
         headers: myHeaders,
         body: {
             name: newCategoryName       
         }
     })
+
+    reloadNuxtApp({
+        path: "/dashboard/categories",
+        ttl: 1000, // default 10000
+    });
 
 };
 

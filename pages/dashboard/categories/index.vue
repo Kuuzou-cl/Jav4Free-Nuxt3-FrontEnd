@@ -47,6 +47,9 @@ definePageMeta({
     layout: "admin",
 });
 
-const { data: allCategories } = await useFetch('https://jav.souzou.dev/categories/v2');
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
+const { data: allCategories } = await useFetch(api + '/categories/getCategories');
 
 </script>

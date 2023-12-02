@@ -38,10 +38,13 @@ definePageMeta({
     layout: "admin",
 });
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 const route = useRoute();
 let id = route.params.id;
 
-const {data : dataCategory} = await useFetch('https://jav.souzou.dev/categories/getCategoryv2?id='+id);
+const {data : dataCategory} = await useFetch(api + '/categories/getCategory?id='+id);
 
 let newCategoryName = dataCategory._rawValue.Category.name;
 
@@ -51,7 +54,7 @@ const postCategory = async () => {
     const myHeaders = new Headers();
     myHeaders.append("authorization", cookieBearer);
 
-    const { data, error } = await useFetch('https://jav.souzou.dev/categories/updateCategoryv2', {
+    const { data, error } = await useFetch(api + '/categories/updateCategory', {
         method: 'PATCH',
         headers: myHeaders,
         body: {
@@ -59,6 +62,11 @@ const postCategory = async () => {
             name: newCategoryName       
         }
     })
+
+    reloadNuxtApp({
+        path: "/dashboard/categories",
+        ttl: 1000, // default 10000
+    });
 
 };
 
