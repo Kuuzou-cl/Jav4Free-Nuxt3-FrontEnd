@@ -1,5 +1,6 @@
 <template>
-    <NuxtLink :to="'/scenes/scene/' + data.code + '?' + data.title" class="card card-scene my-2" style="text-decoration: none; color: inherit;">
+    <NuxtLink :to="'/scenes/scene/' + data.code + '?' + data.title" class="card card-scene my-2"
+        style="text-decoration: none; color: inherit;">
         <div class="card-scene-media">
             <img :src="data.staticImage" />
             <video :id="data.id" @mouseleave="restart()" @mouseover="start()" preload="auto" loop>
@@ -13,9 +14,7 @@
             <b class="post">{{ formatCode(data.code) }}</b>
         </div>
         <div class="box-content">
-            <h3 class="title">
-                <p> {{ formatDescription(data.code,data.title)   }} </p>
-            </h3>
+            <p class="title"> {{ formatDescription(data.code, data.title) }} </p>
         </div>
     </NuxtLink>
 </template>
@@ -24,21 +23,21 @@
 const props = defineProps(['data']);
 const { isMobile, isTablet } = useDevice();
 
-function formatDescription(_code, _title){
+function formatDescription(_code, _title) {
     let newTitle;
-    let maxLenght = 60;
+    let maxLenght = 80;
     if (isMobile) {
         maxLenght = 80
     }
     if (_title.length > maxLenght) {
         newTitle = _title.slice(0, maxLenght) + " ...";
-      } else {
+    } else {
         newTitle = _title;
-      }
+    }
     return newTitle;
 };
 
-function formatCode(_code){
+function formatCode(_code) {
     return _code.slice(0, _code.length - 4);
 };
 

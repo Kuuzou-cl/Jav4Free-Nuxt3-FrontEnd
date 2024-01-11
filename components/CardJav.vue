@@ -9,12 +9,14 @@
             </div>
             <div class="movie-title">
                 <div class="movie-tag movie-tag-1">{{ props.data.categories[0].name }}</div>
-                <div class="movie-tag movie-tag-2">{{ props.data.categories[1].name }}</div>
-                <div class="movie-tag movie-tag-3">{{ props.data.categories[2].name }}</div>
+                <div class="movie-tag movie-tag-1">{{ props.data.categories[1].name }}</div>
             </div>
             <p v-if="!isMobile" class="movie-description">
                 {{ shortTitle(props.data.title) }}
             </p>
+            <div class="movie-title">
+                <div class="movie-tag movie-tag-idol">{{ props.data.idols[0].name }}</div>
+            </div>
         </div>
     </NuxtLink>
 </template>
@@ -25,8 +27,8 @@ const { isMobile, isTablet } = useDevice();
 
 const shortTitle = (title) => {
     let newTitle;
-    if (title.length > 80) {
-        newTitle = title.slice(0, 80) + " ...";
+    if (title.length > 120) {
+        newTitle = title.slice(0, 120) + " ...";
         return newTitle;
     } else {
         return title;

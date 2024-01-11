@@ -1,60 +1,72 @@
 <template>
-  <div class="container-fluid ">
-    <SearchBar />
-    <div class="row row-title my-2 py-1">
+  <div class="container ">
+    <div class="row my-2 py-1">
       <div class="col-lg-12 text-center">
-        <h6>Newest AV Added</h6>
-      </div>
-    </div>
-    <div class="row d-flex justify-content-center my-2 py-1">
-      <div class="col-lg-10">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div v-for="(jav, idx) in latestJavs.Javs" :key="jav.id" class="carousel-item d-flex justify-content-center"
-              :class="{ active: idx == 0 }">
-              <CardJavCarousel v-bind:data="jav" />
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+        <div class="alert alert-dark" role="alert">
+          Newest JAV Added
+          <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div v-bind:class="getRowScenes()">
-        <div class="row row-title">
-          <div class="col-lg-12 text-center">
-            <h6>Hot New Japanese Adult Videos</h6>
-          </div>
         </div>
         <div class="row">
-          <div v-for="jav in pageJavs.Javs" :key="jav.id" v-bind:class="getColumnsScenes()">
+          <div v-for="jav in javsTest" :key="jav.id" class="col-lg-6">
             <CardJav v-bind:data="jav" />
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <NuxtLink :to="'/javs/1'" class="btn btn-more">
-              watch more Japanese Adult Videos
-            </NuxtLink>
+      </div>
+    </div>
+    <div class="row my-2 py-1">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="title">Hot Categories</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Cheating</button></div>
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Creampie</button></div>
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Older Sister</button></div>
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Molester</button></div>
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Gangbang</button></div>
+        <div class="col-lg-2 text-center"><button class="btn btn-dark">Beautiful Girl</button></div>
+      </div>
+    </div>
+    <div class="row my-2 py-1">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="title">Latest Porn Videos Added</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div v-for="scene in scenesTest" :key="scene.id" class="col-lg-3">
+          <CardScene v-bind:data="scene" /> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="alert alert-dark" role="alert">
+            Newest Videos Added
+            <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
+            </button>
           </div>
         </div>
       </div>
-      <div v-if="!isMobile" v-bind:class="getRowIdol()">
-        <div class="row row-title">
-          <div class="col-lg-12 text-center">
-            <h6>Featured AV Idols </h6>
-          </div>
+    </div>
+    <div class="row my-2 py-1">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3 class="title">Hot Pornstars</h3>
         </div>
-        <div class="row">
-          <div v-for="idol in idols_random.Idols" :key="idol.id" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding">
-            <CardIdol v-bind:data="idol" />
+      </div>
+      <div class="row mb-3">
+        <div v-for="idol in idolsTest" :key="idol.id" class="col-lg-2">
+          <CardIdol v-bind:data="idol" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="alert alert-dark" role="alert">
+            Most Viewed Pornstars
+            <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
+            </button>
           </div>
         </div>
       </div>
@@ -63,6 +75,84 @@
 </template>
 
 <script setup>
+let javsTest = [
+  {
+    id: 0, code: "OAE-165",
+    poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    categories: [{ name: "Category 1" }, { name: "Category 2" }, { name: "Cat3" }],
+    idols: [{ name: "Yua Mikami" }]
+  },
+  {
+    id: 1, code: "SAME-027",
+    poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    categories: [{ name: "Category 1" }, { name: "Category 2" }, { name: "Cat3" }],
+    idols: [{ name: "Kudou Rara" }]
+  }
+]
+
+let scenesTest = [
+  {
+    id: 0, code: "OAE-165_01",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_01-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_01-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 1, code: "OAE-165_02",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_02-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_02-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 2, code: "OAE-165_03",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_03-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_03-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 3, code: "OAE-165_04",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_04-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165_04-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 4, code: "SAME-027_01",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_01-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_01-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 5, code: "SAME-027_02",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_02-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_02-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 6, code: "SAME-027_03",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_03-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_03-preview.webm",
+    duration: "00:10:10"
+  }, {
+    id: 7, code: "SAME-027_04",
+    staticImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_04-static.webp",
+    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
+    previewImage: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027_04-preview.webm",
+    duration: "00:10:10"
+  }
+];
+
+let idolsTest = [
+{id: 0, name: "Yua Mikami", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/mikami-yua.jpg"},
+{id: 1, name: "Julia", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/julia.jpg"},
+{id: 2, name: "Kudou Rara", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/kudou-rara.jpg"},
+{id: 3, name: "Himesaki Hana", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/himesaki-hana.jpg"},
+{id: 4, name: "Miura Noa", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/miura-noa.jpg"},
+{id: 5, name: "Momozono Rena", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/momozono-rena.jpg"}
+]
+
 const { isMobile, isTablet } = useDevice();
 
 const runtimeConfig = useRuntimeConfig();
