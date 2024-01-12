@@ -11,28 +11,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <NuxtLink to="/idols/1" tag="a" class="nav-link">
+                        <NuxtLink to="/all-videos/1" tag="a" class="nav-link">
                             Porn Videos
                         </NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink to="/idols/1" tag="a" class="nav-link">
+                        <NuxtLink to="/weekly-top/1" tag="a" class="nav-link">
                             Weekly top
                         </NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink to="/idols/1" tag="a" class="nav-link">
+                        <NuxtLink to="/20min-videos/1" tag="a" class="nav-link">
                             15min+
                         </NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink to="/idols/1" tag="a" class="nav-link">
+                        <NuxtLink to="/javs/1" tag="a" class="nav-link">
+                            JAVs
+                        </NuxtLink>
+                    </li>
+                    <li class="nav-item">
+                        <NuxtLink to="/categories/1" tag="a" class="nav-link">
                             Categories
                         </NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink to="/idols/1" tag="a" class="nav-link">
-                            PornStars
+                        <NuxtLink to="/av-idol/1" tag="a" class="nav-link">
+                            AV Idol
                         </NuxtLink>
                     </li>
                 </ul>

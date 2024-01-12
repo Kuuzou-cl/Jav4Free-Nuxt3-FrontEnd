@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="'/scenes/scene/' + data.code + '?' + data.title" class="card card-scene my-2"
+    <NuxtLink :to="'/videos/' + data.code + '?' + data.title" class="card card-scene my-2"
         style="text-decoration: none; color: inherit;">
         <div class="card-scene-media">
             <img :src="data.staticImage" />
