@@ -2,13 +2,13 @@
     <NuxtLink :to="'/videos/' + data.code + '?' + data.title" class="card card-scene my-2"
         style="text-decoration: none; color: inherit;">
         <div class="card-scene-media">
-            <img :src="data.staticImage" />
+            <img :src="data.poster" />
             <video :id="data.id" @mouseleave="restart()" @mouseover="start()" preload="auto" loop>
-                <source :src="data.previewImage" type="video/mp4" />
+                <source :src="data.video_preview" type="video/mp4" />
             </video>
         </div>
         <div class="box-code">
-            <b class="post">{{ data.duration }}</b>
+            <b class="post">{{ data.length }}</b>
         </div>
         <div class="box-code2">
             <b class="post">{{ formatCode(data.code) }}</b>

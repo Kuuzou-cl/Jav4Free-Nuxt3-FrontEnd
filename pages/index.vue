@@ -8,7 +8,7 @@
           </button>
         </div>
         <div class="row">
-          <div v-for="jav in javsTest" :key="jav.id" class="col-lg-6">
+          <div v-for="jav in newestJavs" :key="jav.id" class="col-lg-6">
             <CardJav v-bind:data="jav" />
           </div>
         </div>
@@ -21,12 +21,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Cheating</button></div>
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Creampie</button></div>
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Older Sister</button></div>
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Molester</button></div>
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Gangbang</button></div>
-        <div class="col-lg-2 text-center"><button class="btn btn-dark">Beautiful Girl</button></div>
+        <div v-for="category in hotCategories" :key="category.id" class="col-lg-2 text-center"><button class="btn btn-dark">{{ category.name }}</button></div>
       </div>
     </div>
     <div class="row my-2 py-1">
@@ -36,7 +31,7 @@
         </div>
       </div>
       <div class="row">
-        <div v-for="scene in scenesTest" :key="scene.id" class="col-lg-3">
+        <div v-for="scene in newestVideos" :key="scene.id" class="col-lg-3">
           <CardScene v-bind:data="scene" /> 
         </div>
       </div>
@@ -75,22 +70,6 @@
 </template>
 
 <script setup>
-let javsTest = [
-  {
-    id: 0, code: "OAE-165",
-    poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/OAE-165/OAE-165.webp",
-    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
-    categories: [{ name: "Category 1" }, { name: "Category 2" }, { name: "Cat3" }],
-    idols: [{ name: "Yua Mikami" }]
-  },
-  {
-    id: 1, code: "SAME-027",
-    poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/scene/SAME-027/SAME-027.webp",
-    title: "Yua Mikami X MOODYZ One-time Limited Revival! ? Alone Bakobako Bus Tour 2023 Just Before Retirement! Last Big Thank You Special!!",
-    categories: [{ name: "Category 1" }, { name: "Category 2" }, { name: "Cat3" }],
-    idols: [{ name: "Kudou Rara" }]
-  }
-]
 
 let scenesTest = [
   {
@@ -158,17 +137,17 @@ const { isMobile, isTablet } = useDevice();
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-let limitLatestJavs = 4;
-let limitIdolsRandom = 4;
+let limitLatestJavs = 2;
+let limitCategories = 6;
+let limitLatestVideos = 12;
 
-if (isMobile) {
-  limitLatestJavs = 3;
-  limitIdolsRandom = 4;
-}
+const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + limitLatestJavs);
+const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + limitCategories);
+const { data: getVideos } = await useFetch(api + '/videos/getlatest?limit=' + limitLatestVideos);
 
-const { data: latestJavs } = await useFetch(api + '/javs/getlatestjavs?limit=' + limitLatestJavs);
-const { data: idols_random } = await useFetch(api + '/idols/getrandombylimit?limit=' + limitIdolsRandom);
-const { data: pageJavs } = await useFetch(api + '/javs/getjavs?page=1&hide=0&variable=id&order=desc');
+let newestJavs = getJavs._value.Response;
+let hotCategories = getCategories._value.Response;
+let newestVideos = getVideos._value.Response;
 
 const getColumnsScenes = () => {
   if (isMobile) {
