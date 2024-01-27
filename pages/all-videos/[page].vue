@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="row">
-                <div v-for="scene in allVideos.Videos" :key="video.id" class="col-lg-3">
+                <div v-for="scene in allVideos.Videos" :key="scene.id" class="col-lg-3">
                     <CardScene v-bind:data="scene" />
                 </div>
             </div>
