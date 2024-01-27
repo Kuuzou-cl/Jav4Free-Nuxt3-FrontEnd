@@ -424,10 +424,9 @@ footer {
 
 //Pagination
 .container-pagination {
-    background: #1f1f1f;
+    background: #212121;
     padding: 20px;
-    border-radius: 3px;
-    box-shadow: -3px -3px 7px #1f1f1f, 3px 3px 5px #141414;
+    border-radius: 0px;
     width: min-content;
 }
 
@@ -447,7 +446,7 @@ footer {
 .pagination li a {
     font-size: 18px;
     text-decoration: none;
-    color: #fff;
+    color: #ffffff8c;
     height: 45px;
     width: 55px;
     display: block;

@@ -39,8 +39,8 @@
         <div class="col-lg-12 text-center">
           <div class="alert alert-dark" role="alert">
             Newest Videos Added
-            <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
-            </button>
+            <NuxtLink to="/all-videos/1" tag="button" class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
+            </NuxtLink>
           </div>
         </div>
       </div>

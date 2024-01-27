@@ -7,8 +7,28 @@
                 </div>
             </div>
             <div class="row">
-                <div v-for="scene in scenesTest" :key="scene.id" class="col-lg-3">
+                <div v-for="scene in allVideos.Videos" :key="video.id" class="col-lg-3">
                     <CardScene v-bind:data="scene" />
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-12 d-flex justify-content-center">
+                    <div class="container-pagination">
+                        <ul class="pagination">
+                            <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
+                            <li v-else><a :href="'/all-videos/' + page">Previous</a></li>
+                            <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
+                                <a :href="'/all-videos/' + prevPage">{{ prevPage }}</a>
+                            </li>
+                            <li class="active"><a :href="'/all-videos/' + page">{{ page }}</a></li>
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, allVideos.lastPage)"
+                                :key="index">
+                                <a :href="'/all-videos/' + nextPage">{{ nextPage }}</a>
+                            </li>
+                            <li v-if="page < allVideos.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-else><a :href="'/all-videos/' + page">Next</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,14 +113,16 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
+const { data: getVideos } = await useFetch(api + '/videos/getallvideos?page=' + page);
+let allVideos = getVideos._value.Response;
 
 const nextClick = () => {
-    let nextPage = '/javs/' + (parseInt(page) + 1);
+    let nextPage = '/all-videos/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/javs/' + (parseInt(page) - 1);
+    let prevPage = '/all-videos/' + (parseInt(page) - 1);
     return prevPage;
 };
 
