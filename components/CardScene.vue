@@ -2,10 +2,7 @@
     <NuxtLink :to="'/videos/' + data.code + '?' + data.title" class="card card-scene my-2"
         style="text-decoration: none; color: inherit;">
         <div class="card-scene-media">
-            <img :src="data.poster" />
-            <video :id="data.id" @mouseleave="restart()" @mouseover="start()" preload="auto" loop>
-                <source :src="data.video_preview" type="video/mp4" />
-            </video>
+            <img :id="data.code" :src="data.poster" @mouseover="start(data.code,data.video_preview)" @mouseleave="restart(data.code,data.poster)" />
         </div>
         <div class="box-code">
             <b class="post">{{ data.length }}</b>
@@ -42,13 +39,13 @@ function formatCode(_code) {
 };
 
 
-function restart() {
-    var video = document.getElementById(props.data.id);
-    video.load();
+function restart(code,poster) {
+    const demoId = document.getElementById(code);
+    demoId.src = poster;
 };
 
-function start() {
-    var video = document.getElementById(props.data.id);
-    video.play();
+function start(code,video_preview) {
+    const demoId = document.getElementById(code);
+    demoId.src = video_preview;
 };
 </script>
