@@ -1,14 +1,14 @@
 <template>
-    <div class="container-fluid">
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>Recently Added Videos</h6>
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">Recently Added Porn Videos</h3>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row my-2">
-                <div v-for="jav in allJavs.Javs" :key="jav.id" class="col-lg-6">
-                    <CardJav v-bind:data="jav" />
+            <div class="row">
+                <div v-for="jav in javbypage.Javs" :key="jav.id" class="col-lg-3">
+                    <CardScene v-bind:data="jav" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -21,11 +21,11 @@
                                 <a :href="'/javs/' + prevPage">{{ prevPage }}</a>
                             </li>
                             <li class="active"><a :href="'/javs/' + page">{{ page }}</a></li>
-                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, allJavs.meta.lastPage)"
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)"
                                 :key="index">
                                 <a :href="'/javs/' + nextPage">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allJavs.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
                             <li v-else><a :href="'/javs/' + page">Next</a></li>
                         </ul>
                     </div>
@@ -40,8 +40,24 @@ const route = useRoute();
 const { isMobile, isTablet } = useDevice();
 let page = route.params.page;
 
+if (isNaN(page)) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
+if (page == null || page == "" || page < 1) {
+    page = 1;
+}
+
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
+
+const { data: getJavs } = await useFetch(api + '/javs/getjavbypage?page=' + page);
+
+if (getJavs._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const javbypage = getJavs._value.Response;
 
 useHead({
     title: "Recently Videos | Jav4Free | Japanese Adult Videos for Free",
@@ -51,20 +67,6 @@ useHead({
         }
     ]
 })
-
-if (isNaN(page)) {
-    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
-}
-
-if (page == null || page == "" || page < 1) {
-    page = 1;
-}
-
-const { data: allJavs } = await useFetch(api + '/javs/getjavs?page=' + page + '&hide=0&variable=id&order=desc');
-
-if (allJavs._rawValue == null) {
-    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
-}
 
 const nextClick = () => {
     let nextPage = '/javs/' + (parseInt(page) + 1);
@@ -125,7 +127,6 @@ const nextPages = (page, lastPage) => {
             return nextPages;
         }
     }
-
 };
 
 </script>
