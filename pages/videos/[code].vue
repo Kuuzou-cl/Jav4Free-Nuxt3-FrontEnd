@@ -8,7 +8,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <mux-player stream-type="on-demand" :playback-id="playbackId"></mux-player>
+                    <video class="video-jav-player" id="jav_player">
+                        <source :src="videoJav.Video.playback_id" type='video/mp4' />
+                    </video>
                 </div>
             </div>
             <div class="row">
@@ -16,7 +18,7 @@
             </div>
             <div class="row mb-2">
                 <div class="col-lg-12">
-                    <h3 class="title">Pornstars</h3>
+                    <h3 class="title">AV Idol</h3>
                     <button v-for="idol in videoJav.Idols" :key="idol.id" class="btn btn-dark btn-sm mx-1">{{ idol.name
                     }}</button>
                 </div>
@@ -37,7 +39,7 @@
             </div>
             <div class="row">
                 <div v-for="scene in scenesTest" :key="scene.id" class="col-lg-3">
-                    
+                    <CardScene v-bind:data="scene" />
                 </div>
             </div>
         </div>
@@ -45,7 +47,6 @@
 </template>
 
 <script setup>
-import "@mux/mux-player"
 
 let scenesTest = [
     {
@@ -99,9 +100,9 @@ let scenesTest = [
     }
 ];
 
+
 const route = useRoute();
 let code = route.params.code;
-const playbackId = ref();
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
@@ -116,7 +117,25 @@ const { data: getVideo } = await useFetch(api + '/videos/getvideo?code=' + code)
 let videoJav = getVideo._value.Response;
 
 onMounted(() => {
-    playbackId.value = videoJav.Video.playback_id;
+    var player = fluidPlayer('jav_player', {
+        layoutControls: {
+            layout: "default",
+            fillToContainer: false,
+            preload: true,
+            //posterImage: videoJav.Video.poster,
+            //timelinePreview: {
+            //    file: videoJav.Video.vtt,
+            //    type: "VTT",
+            //},
+            allowTheatre: false,
+            contextMenu: {
+                controls: false
+            }
+        },
+        onBeforeXMLHttpRequest: (request) => {
+            request.withCredentials = false;
+        },
+    });
 });
 
 </script>

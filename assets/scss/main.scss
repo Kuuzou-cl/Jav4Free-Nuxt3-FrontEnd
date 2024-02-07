@@ -120,6 +120,18 @@ body {
     background-color: #ffffff00;
     cursor: pointer;
 
+    img {
+        z-index: 3;
+        width: 100% !important;
+        height: auto;
+    }
+
+    video {
+        display: none;
+        width: 100% !important;
+        height: auto;
+    }
+
     .box-code2 {
         top: 0%;
         left: 0%;
@@ -166,6 +178,19 @@ body {
             margin: 0%;
             padding: 2% 2%;
         }
+    }
+}
+.card-scene-media:hover,
+.card-scene-media:active,
+.card-scene-media:focus {
+    img {
+        display: none;
+    }
+
+    video {
+        display: block;
+        z-index: 1;
+        background-color: #ffffff00;
     }
 }
 

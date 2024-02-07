@@ -8,6 +8,15 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
+                    <video class="video-jav-player" id="jav_player">
+                        <source :src="javData.video" type='video/mp4' />
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
                     <CardJavFull v-bind:data="javData" />
                 </div>
             </div>
@@ -15,12 +24,12 @@
         <div class="row my-2 py-1">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="title">Videos from this JAV</h3>
+                    <h3 class="title">View more Porn Videos</h3>
                 </div>
             </div>
             <div class="row">
-                <div v-for="scene in javData.videos" :key="scene.id" class="col-lg-3">
-                    <CardScene v-bind:data="scene" />
+                <div v-for="jav in randomJavData" :key="jav.id" class="col-lg-3">
+                    <CardScene v-bind:data="jav" />
                 </div>
             </div>
         </div>
@@ -28,6 +37,7 @@
 </template>
 
 <script setup>
+
 const route = useRoute();
 let code = route.params.code;
 
@@ -39,13 +49,15 @@ if (!code || code.trim().length === 0) {
 }
 
 const { data: getJav } = await useFetch(api + '/javs/getjavbycode?code=' + code);
+const { data: getrandomJavs } = await useFetch(api + '/javs/getrandom?limit=' + 8);
 
-if (!getJav._value.Response) {
+if (!getJav._value.Response || !getrandomJavs._value.Response) {
     console.log('NULL Jav');
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 
 let javData = getJav._value.Response;
+let randomJavData = getrandomJavs._value.Response;
 
 useHead({
     title: javData.code + " | Jav4Free | " + javData.title,
@@ -59,5 +71,27 @@ useHead({
         }
     ]
 })
+
+onMounted(() => {
+    var player = fluidPlayer('jav_player', {
+        layoutControls: {
+            layout: "default",
+            fillToContainer: false,
+            preload: true,
+            posterImage: javData.static,
+            //timelinePreview: {
+            //    file: javData.vtt,
+            //    type: "VTT",
+            //},
+            allowTheatre: false,
+            contextMenu: {
+                controls: false
+            }
+        },
+        onBeforeXMLHttpRequest: (request) => {
+            request.withCredentials = false;
+        },
+    });
+});
 
 </script>

@@ -31,8 +31,8 @@
         </div>
       </div>
       <div class="row">
-        <div v-for="scene in newestVideos" :key="scene.id" class="col-lg-3">
-          <CardScene v-bind:data="scene" /> 
+        <div v-for="jav in latestHomeJavs" :key="jav.id" class="col-lg-3">
+          <CardScene v-bind:data="jav" /> 
         </div>
       </div>
       <div class="row">
@@ -85,17 +85,13 @@ const { isMobile, isTablet } = useDevice();
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-let limitLatestJavs = 2;
-let limitCategories = 6;
-let limitLatestVideos = 12;
+const { data: getnewestJavs } = await useFetch(api + '/javs/getlatest?limit=' + 2);
+const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + 6);
+const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + 12);
 
-const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + limitLatestJavs);
-const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + limitCategories);
-const { data: getVideos } = await useFetch(api + '/videos/getlatest?limit=' + limitLatestVideos);
-
-let newestJavs = getJavs._value.Response;
+let newestJavs = getnewestJavs._value.Response;
 let hotCategories = getCategories._value.Response;
-let newestVideos = getVideos._value.Response;
+let latestHomeJavs = getJavs._value.Response;
 
 const getColumnsScenes = () => {
   if (isMobile) {
