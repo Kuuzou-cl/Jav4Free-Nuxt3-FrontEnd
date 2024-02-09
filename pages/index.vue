@@ -4,8 +4,9 @@
       <div class="col-lg-12 text-center">
         <div class="alert alert-dark" role="alert">
           Newest JAV Added
-          <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
-          </button>
+          <NuxtLink to="/javs/1" tag="button" class="btn btn-dark">View More <font-awesome-icon
+              icon="fa-solid fa-circle-play" />
+          </NuxtLink>
         </div>
         <div class="row">
           <div v-for="jav in newestJavs" :key="jav.id" class="col-lg-6">
@@ -21,7 +22,8 @@
         </div>
       </div>
       <div class="row">
-        <div v-for="category in hotCategories" :key="category.id" class="col-lg-2 text-center"><button class="btn btn-dark">{{ category.name }}</button></div>
+        <div v-for="category in hotCategories" :key="category.id" class="col-lg-2 text-center"><button
+            class="btn btn-dark">{{ category.name }}</button></div>
       </div>
     </div>
     <div class="row my-2 py-1">
@@ -32,14 +34,15 @@
       </div>
       <div class="row">
         <div v-for="jav in latestHomeJavs" :key="jav.id" class="col-lg-3">
-          <CardScene v-bind:data="jav" /> 
+          <CardScene v-bind:data="jav" />
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="alert alert-dark" role="alert">
             Newest Videos Added
-            <NuxtLink to="/all-videos/1" tag="button" class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
+            <NuxtLink to="/javs/1" tag="button" class="btn btn-dark">View More <font-awesome-icon
+                icon="fa-solid fa-circle-play" />
             </NuxtLink>
           </div>
         </div>
@@ -72,12 +75,12 @@
 <script setup>
 
 let idolsTest = [
-{id: 0, name: "Yua Mikami", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/mikami-yua.jpg"},
-{id: 1, name: "Julia", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/julia.jpg"},
-{id: 2, name: "Kudou Rara", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/kudou-rara.jpg"},
-{id: 3, name: "Himesaki Hana", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/himesaki-hana.jpg"},
-{id: 4, name: "Miura Noa", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/miura-noa.jpg"},
-{id: 5, name: "Momozono Rena", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/momozono-rena.jpg"}
+  { id: 0, name: "Yua Mikami", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/mikami-yua.jpg" },
+  { id: 1, name: "Julia", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/julia.jpg" },
+  { id: 2, name: "Kudou Rara", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/kudou-rara.jpg" },
+  { id: 3, name: "Himesaki Hana", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/himesaki-hana.jpg" },
+  { id: 4, name: "Miura Noa", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/miura-noa.jpg" },
+  { id: 5, name: "Momozono Rena", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/momozono-rena.jpg" }
 ]
 
 const { isMobile, isTablet } = useDevice();
