@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div v-for="idol in idolsTest" :key="idol.id" class="col-lg-2">
+        <div v-for="idol in randomIdols" :key="idol.id" class="col-lg-2">
           <CardIdol v-bind:data="idol" />
         </div>
       </div>
@@ -74,15 +74,6 @@
 
 <script setup>
 
-let idolsTest = [
-  { id: 0, name: "Yua Mikami", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/mikami-yua.jpg" },
-  { id: 1, name: "Julia", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/julia.jpg" },
-  { id: 2, name: "Kudou Rara", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/kudou-rara.jpg" },
-  { id: 3, name: "Himesaki Hana", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/himesaki-hana.jpg" },
-  { id: 4, name: "Miura Noa", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/miura-noa.jpg" },
-  { id: 5, name: "Momozono Rena", poster: "https://jav.nyc3.cdn.digitaloceanspaces.com/idol/momozono-rena.jpg" }
-]
-
 const { isMobile, isTablet } = useDevice();
 
 const runtimeConfig = useRuntimeConfig();
@@ -91,10 +82,12 @@ const api = runtimeConfig.public.apiBase;
 const { data: getnewestJavs } = await useFetch(api + '/javs/getlatest?limit=' + 2);
 const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + 6);
 const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + 12);
+const { data: getIdols } = await useFetch(api + '/idols/getrandombylimit?limit=' + 6);
 
 let newestJavs = getnewestJavs._value.Response;
 let hotCategories = getCategories._value.Response;
 let latestHomeJavs = getJavs._value.Response;
+let randomIdols = getIdols._value.Response;
 
 const getColumnsScenes = () => {
   if (isMobile) {

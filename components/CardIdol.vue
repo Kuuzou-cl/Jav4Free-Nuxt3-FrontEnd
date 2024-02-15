@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="'/idols/' + data.name + '/1'" class="card card-idol text-center">
+    <NuxtLink :to="'/av-idol/' + data.name + '/1'" class="card card-idol text-center">
         <img class="card-img" :src="data.poster" />
         <div class="card-banner">
             <span class="card-name">

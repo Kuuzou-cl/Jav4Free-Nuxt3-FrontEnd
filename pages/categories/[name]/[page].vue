@@ -1,14 +1,14 @@
 <template>
-    <div class="container-fluid">
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>Latest videos of {{ id }}</h6>
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">Recently Added Porn Videos of {{ name }}</h3>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row my-2">
-                <div v-for="jav in CategoryData.Javs" :key="jav.id" v-bind:class="getColumnsScenes()">
-                    <CardJav v-bind:data="jav" />
+            <div class="row">
+                <div v-for="jav in getJavs.Javs" :key="jav.id" class="col-lg-3">
+                    <CardScene v-bind:data="jav" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -16,17 +16,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/categories/' + id + '/' + page">Previous</a></li>
+                            <li v-else><a :href="'/categories/' + name + '/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/categories/' + id + '/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/categories/' + name + '/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/categories/' + id + '/' + page">{{ page }}</a></li>
-                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, CategoryData.meta.lastPage)"
+                            <li class="active"><a :href="'/categories/' + name + '/' + page">{{ page }}</a></li>
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, getJavs.lastPage)"
                                 :key="index">
-                                <a :href="'/categories/' + id + '/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/categories/' + name + '/' + nextPage">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < CategoryData.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/categories/' + id + '/' + page">Next</a></li>
+                            <li v-if="page < getJavs.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-else><a :href="'/categories/' + name + '/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,13 +38,13 @@
 <script setup>
 const route = useRoute();
 let page = route.params.page;
-let id = route.params.id;
+let name = route.params.name;
 const { isMobile, isTablet } = useDevice();
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-if (isNaN(page) || !id || id.trim().length === 0) {
+if (isNaN(page) || !name || name.trim().length === 0) {
     throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
 
@@ -52,36 +52,34 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
-const { data: CategoryData } = await useFetch(api + '/categories/getJavsByCategories?page=' + page + '&name=' + id + '&order=desc');
+const { data: CategoryData } = await useFetch(api + '/categories/getJavsByCategories?page=' + page + '&name=' + name);
 
-if (CategoryData._rawValue.Javs.length == 0) {
+if (CategoryData._value.Response == null) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 
+const getJavs = CategoryData._value.Response;
+
+
 useHead({
-    title: "Watch the latest porn videos in the " + id + " category | Jav4Free",
+    title: "Watch the latest porn videos in the " + name + " category | Jav4Free",
     meta: [
         {
             name: 'description', content: "Jav4Free, Here you can watch" +
-                id +
+            name +
                 " porn videos, find the latest japanese adult videos in high quality, various Idols and categories. Every video stream quickly and with amazing quality."
         }
     ]
 })
 
 const nextClick = () => {
-    let nextPage = '/categories/' + id + '/' + (parseInt(page) + 1);
+    let nextPage = '/categories/' + name + '/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/categories/' + id + '/' + (parseInt(page) - 1);
+    let prevPage = '/categories/' + name + '/' + (parseInt(page) - 1);
     return prevPage;
-};
-
-const pushPage = (page) => {
-    let newPage = parseInt(page);
-    navigateTo('/scenes/' + newPage);
 };
 
 const previousPages = (page) => {
@@ -134,19 +132,6 @@ const nextPages = (page, lastPage) => {
         }
     }
 
-};
-
-const getColumnsScenes = () => {
-    if (isMobile) {
-        return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
-    } else {
-        if (isTablet) {
-            return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
-        } else {
-            return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
-        }
-
-    }
 };
 
 </script>

@@ -1,23 +1,14 @@
 <template>
-    <div class="container-fluid">
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>{{ IdolData.Idol.name }} | JAV Idol</h6>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row my-2">
-                <div class="col-lg-2 d-flex justify-content-center">
-                    <CardIdol v-bind:data="IdolData.Idol" />
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">{{ javsbyidol.Idol.name }} | AV Idol Videos</h3>
                 </div>
             </div>
-            <div class="row my-2">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div v-for="jav in IdolData.Javs" :key="jav.id" v-bind:class="getColumnsScenes()">
-                            <CardJav v-bind:data="jav" />
-                        </div>
-                    </div>
+            <div class="row">
+                <div v-for="jav in javsbyidol.Javs" :key="jav.id" class="col-lg-3">
+                    <CardScene v-bind:data="jav" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -25,17 +16,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/idols/' + name + '/' + page">Previous</a></li>
+                            <li v-else><a :href="'/av-idol/' + javsbyidol.Idol.name + '/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/idols/' + name + '/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/av-idol/'+ javsbyidol.Idol.name + '/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/idols/' + name + '/' + page">{{ page }}</a></li>
-                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, IdolData.meta.lastPage)"
+                            <li class="active"><a :href="'/av-idol/'+ javsbyidol.Idol.name + '/' + page">{{ page }}</a></li>
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, javsbyidol.lastPage)"
                                 :key="index">
-                                <a :href="'/idols/' + name + '/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/av-idol/'+ javsbyidol.Idol.name + '/' + nextPage">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < IdolData.meta.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/idols/' + name + '/' + page">Next</a></li>
+                            <li v-if="page < javsbyidol.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-else><a :href="'/av-idol/'+ javsbyidol.Idol.name + '/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -61,6 +52,13 @@ if (page == null || page == "" || page < 1) {
     page = 1;
 }
 
+const { data: getIdol } = await useFetch(api + '/idols/getjavbyidol?page=' + page + '&name=' + name);
+
+if (getIdol._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const javsbyidol = getIdol._value.Response;
 
 useHead({
     title: name + " Porn Videos | Jav4Free",
@@ -73,19 +71,13 @@ useHead({
     ]
 })
 
-const { data: IdolData } = await useFetch(api + '/idols/getjavbyidol?page=' + page + '&name=' + name + '&order=desc');
-
-if (!IdolData._rawValue.Idol) {
-    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
-}
-
 const nextClick = () => {
-    let nextPage = '/idols/' + name + '/' + (parseInt(page) + 1);
+    let nextPage = '/av-idol/' + name + '/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/idols/' + name + '/' + (parseInt(page) - 1);
+    let prevPage = '/av-idol/' + name + '/' + (parseInt(page) - 1);
     return prevPage;
 };
 
