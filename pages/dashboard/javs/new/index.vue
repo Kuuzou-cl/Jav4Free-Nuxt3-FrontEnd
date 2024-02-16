@@ -10,6 +10,13 @@
                 <div class="col-lg-6 ">
                     <div class="row">
                         <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Code</label>
+                            <input v-model="newJAVCode" class="input-admin"
+                                placeholder="Enter JAV code, example 'ABC-000'" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
                             <label class="title-input-admin">JAV Title</label>
                             <input v-model="newJAVTitle" class="input-admin"
                                 placeholder="Enter JAV title, no characters limit" />
@@ -17,9 +24,44 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Code</label>
-                            <input v-model="newJAVCode" class="input-admin"
-                                placeholder="Enter JAV code, example 'ABC-000'" />
+                            <label class="title-input-admin">Release Date</label>
+                            <input v-model="newJAVDate" id="startDate" class="form-control" type="date" />
+                            {{ newJAVDate }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Video Link</label>
+                            <input v-model="newJAVVideo" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Static Image</label>
+                            <input v-model="newJAVStatic" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Preview</label>
+                            <input v-model="newJAVPreview" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Poster</label>
+                            <input v-model="newJAVPoster" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV VTT</label>
+                            <input v-model="newJAVVtt" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
                         </div>
                     </div>
                     <div class="row">
@@ -41,12 +83,12 @@
                 </div>
             </div>
             <div class="row my-2">
-                <div class="col-lg-6 d-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center">
                     <button class="btn btn-warning btn-block" @click="viewCategoriesContainer()">
                         View Categories
                     </button>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-center">
+                <div class="col-lg-4 d-flex justify-content-center">
                     <button class="btn btn-warning btn-block" @click="viewIdolsContainer()">
                         View Idols
                     </button>
@@ -79,7 +121,7 @@
             <div class="row my-2">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <button class="btn btn-success" @click="postJav()">
-                        Add JAV
+                        New JAV
                     </button>
                 </div>
             </div>
@@ -97,31 +139,54 @@ definePageMeta({
     layout: "admin",
 });
 
-const imgCodePreview = ref(0);
+const route = useRoute();
+let id = route.params.id;
 
-let newJAVTitle = "";
-let newJAVCode = "";
-let newJAVHide = true;
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
+const imgCodePreview = ref(0);
 
 let imgPreview = "";
 
 const viewCategories = ref(false);
 const viewIdols = ref(false);
 
-const { data: dataCategories } = await useFetch('https://jav.souzou.dev/categories/v2');
-const newJAVCategories = ref(dataCategories._rawValue.Categories);
-newJAVCategories._rawValue.forEach(element => {
+const { data: getCategories } = await useFetch(api + '/categories/getCategories');
+const { data: getIdols } = await useFetch(api + '/idols/getIdols');
+
+if (!getCategories._value.Response || !getIdols._value.Response) {
+    console.log('NULL Jav');
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+let categoriesData = getCategories._value.Response;
+let idolsData = getIdols._value.Response;
+
+let newJAVTitle = "";
+let newJAVCode = "";
+let newJAVHide = true;
+let newJAVDate = ref("");
+let newJAVVideo = "";
+let newJAVStatic = "";
+let newJAVPreview = "";
+let newJAVPoster = "";
+let newJAVVtt = "";
+
+
+
+const newJAVCategories = categoriesData;
+newJAVCategories.forEach(element => {
     element.selected = false;
 });
 
-const { data: dataIdols } = await useFetch('https://jav.souzou.dev/idols/getAllv2');
-const newJAVIdols = ref(dataIdols._rawValue.Idols);
-newJAVIdols._rawValue.forEach(element => {
+const newJAVIdols = idolsData;
+newJAVIdols.forEach(element => {
     element.selected = false;
 });
 
 const changeUrlImg = async () => {
-    imgPreview = "https://d27vxor1f495av.cloudfront.net/javs/" + newJAVCode + ".jpg";
+    imgPreview = newJAVPoster;
     imgCodePreview._rawValue.src = imgPreview;
 }
 
@@ -194,7 +259,7 @@ const computedSelectCategories = computed({
     },
     // setter
     set(newValue) {
-        newJAVCategories.value.forEach(category => {
+        newJAVCategories.forEach(category => {
             if (category.id === newValue) {
                 if (category.selected) {
                     category.selected = false;
@@ -213,7 +278,7 @@ const computedSelectIdols = computed({
     },
     // setter
     set(newValue) {
-        newJAVIdols.value.forEach(idol => {
+        newJAVIdols.forEach(idol => {
             if (idol.id === newValue) {
                 if (idol.selected) {
                     idol.selected = false;

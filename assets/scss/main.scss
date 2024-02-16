@@ -476,56 +476,7 @@ footer {
     margin: 0 0 0 15px;
 }
 
-// SEARCH BEGINS
-
-
 //Admin Page
 #wrapper {
     display: flex;
-}
-
-.title-input-admin {
-    text-transform: uppercase;
-    color: #E8175D;
-    letter-spacing: 1px;
-    font-weight: bold;
-
-}
-
-.input-admin {
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
-    margin-bottom: 2%;
-    width: 100%;
-}
-
-.preview-img-jav {
-    height: 250px;
-    width: auto;
-}
-
-.btn-category-admin{
-    color: #f8faff !important;
-    background-color: #141414;
-    border-color: #6b6b6b !important;
-    box-shadow: none !important;
-    border-radius: 0px;
-    width: 250px;
-    margin: 5px 0px;
-}
-
-.btn-category-admin:hover {
-    color: #f8faff !important;
-    border-color: #da0000 !important;
-    background-color: #000000;
-}
-
-.active.btn-category-admin{
-    color: #f8faff !important;
-    background-color: #000000;
-    border-color: #da0000 !important;
-    box-shadow: none !important;
-    border-radius: 0px;
-    width: 250px;
-    margin: 5px 0px;
 }

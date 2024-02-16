@@ -1,4 +1,7 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const runtimeConfig = useRuntimeConfig();
+    const api = runtimeConfig.public.apiBase;
+
     const cookieEmail = useCookie('email');
     const cookieToken = useCookie('token');
 
@@ -7,7 +10,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         const myHeaders = new Headers();
         myHeaders.append("authorization", cookieToken.value);
 
-        const { data, error } = await useFetch('https://jav.souzou.dev/users/currentAlive', {
+        const { data, error } = await useFetch(api + '/users/currentAlive', {
             method: 'POST',
             headers: myHeaders,
             body: { email: cookieEmail },

@@ -16,11 +16,11 @@
                                 <a :href="'/dashboard/idols/' + prevPage">{{ prevPage }}</a>
                             </li>
                             <li class="active"><a :href="'/dashboard/idols/'+page">{{ page }}</a></li>
-                            <li v-for="(nextPage, index) in nextPages(page, allIdols.meta.lastPage)"
+                            <li v-for="(nextPage, index) in nextPages(page, idolsbypage.lastPage)"
                                 :key="index">
                                 <a :href="'/dashboard/idols/' + nextPage ">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allIdols.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-if="page < idolsbypage.lastPage"><a :href="nextClick()">Next</a></li>
                             <li v-else><a :href="'/dashboard/idols/' + page ">Next</a></li>
                         </ul>
                     </div>
@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="idol in allIdols.Idols" :key="idol.id">
+                            <tr v-for="idol in idolsbypage.Idols" :key="idol.id">
                                 <th>{{ idol.name }}</th>
                                 <td>
                                     <font-awesome-icon v-if="idol.image != 'false'" icon="fa-solid fa-check"
@@ -72,6 +72,10 @@ definePageMeta({
 definePageMeta({
     layout: "admin",
 });
+
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 const { isMobile, isTablet } = useDevice();
 const route = useRoute();
 let page = route.params.page;
@@ -80,7 +84,13 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
-const { data: allIdols } = await useFetch('https://jav.souzou.dev/aws/stateFiles/idols/?page=' + page);
+const { data: getIdols } = await useFetch(api + '/idols/getidolbypage?page=' + page);
+
+if (getIdols._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const idolsbypage = getIdols._value.Response;
 
 const nextClick = () => {
     let nextPage = '/dashboard/idols/' + (parseInt(page) + 1) ;

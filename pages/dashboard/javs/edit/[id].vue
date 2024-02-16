@@ -2,12 +2,19 @@
     <div class="container-fluid">
         <div class="row row-title my-2 py-1">
             <div class="col-lg-12 text-center">
-                <h6>New Jav</h6>
+                <h6>Update Jav</h6>
             </div>
         </div>
         <div class="container">
             <div class="row my-4">
                 <div class="col-lg-6 ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Code</label>
+                            <input v-model="newJAVCode" class="input-admin"
+                                placeholder="Enter JAV code, example 'ABC-000'" />
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <label class="title-input-admin">JAV Title</label>
@@ -17,9 +24,44 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Code</label>
-                            <input v-model="newJAVCode" class="input-admin"
-                                placeholder="Enter JAV code, example 'ABC-000'" />
+                            <label class="title-input-admin">Release Date</label>
+                            <input v-model="newJAVDate" id="startDate" class="form-control" type="date" />
+                            {{ newJAVDate }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Video Link</label>
+                            <input v-model="newJAVVideo" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Static Image</label>
+                            <input v-model="newJAVStatic" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Preview</label>
+                            <input v-model="newJAVPreview" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV Poster</label>
+                            <input v-model="newJAVPoster" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="title-input-admin">JAV VTT</label>
+                            <input v-model="newJAVVtt" class="input-admin"
+                                placeholder="Enter JAV title, no characters limit" />
                         </div>
                     </div>
                     <div class="row">
@@ -51,11 +93,6 @@
                         View Idols
                     </button>
                 </div>
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <button class="btn btn-warning btn-block" @click="viewScenesContainer()">
-                        View Scenes
-                    </button>
-                </div>
             </div>
             <div class="row my-2" :class="{ hidden: !viewCategories }">
                 <div v-for="category in newJAVCategories" :key="category.id"
@@ -78,18 +115,6 @@
                     </button>
                     <button v-else class="btn btn-light btn-sm btn-category-admin" @click="addIdol(idol.id)">
                         {{ idol.name }}
-                    </button>
-                </div>
-            </div>
-            <div class="row my-2" :class="{ hidden: !viewScenes }">
-                <div v-for="scene in newJAVScenes" :key="scene.id"
-                    class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
-                    <button v-if="scene.selected" class="active btn btn-light btn-sm btn-category-admin"
-                        @click="addScene(scene.id)">
-                        {{ scene.code }}
-                    </button>
-                    <button v-else class="btn btn-light btn-sm btn-category-admin" @click="addScene(scene.id)">
-                        {{ scene.code }}
                     </button>
                 </div>
             </div>
@@ -117,55 +142,59 @@ definePageMeta({
 const route = useRoute();
 let id = route.params.id;
 
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
 const imgCodePreview = ref(0);
 
 let imgPreview = "";
 
 const viewCategories = ref(false);
 const viewIdols = ref(false);
-const viewScenes = ref(false);
 
-const { data: dataJav } = await useFetch('https://jav.souzou.dev/javs/javIdv2?id=' + id);
+const { data: getJav } = await useFetch(api + '/javs/getjavbyid?id=' + id);
+const { data: getCategories } = await useFetch(api + '/categories/getCategories');
+const { data: getIdols } = await useFetch(api + '/idols/getIdols');
 
-let newJAVTitle = dataJav._rawValue.Jav.title;
-let newJAVCode = dataJav._rawValue.Jav.code;
-let newJAVHide = dataJav._rawValue.Jav.hide;
+if (!getJav._value.Response || !getCategories._value.Response || !getIdols._value.Response) {
+    console.log('NULL Jav');
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
 
-console.log(dataJav._rawValue.Jav.hide)
+let javData = getJav._value.Response;
+let categoriesData = getCategories._value.Response;
+let idolsData = getIdols._value.Response;
 
-if (dataJav._rawValue.Jav.hide == 1) {
+let newJAVTitle = javData.title;
+let newJAVCode = javData.code;
+let newJAVHide = javData.hide;
+let newJAVDate = ref(javData.release_date);
+let newJAVVideo = javData.video;
+let newJAVStatic = javData.static;
+let newJAVPreview = javData.preview;
+let newJAVPoster = javData.poster;
+let newJAVVtt = javData.vtt;
+
+if (javData.hide == 1) {
     newJAVHide = true;
 } else {
     newJAVHide = false;
 }
 
-imgPreview = "https://d27vxor1f495av.cloudfront.net/javs/" + newJAVCode + ".jpg";
+imgPreview = javData.poster;
 
-
-const { data: dataScenes } = await useFetch('https://jav.souzou.dev/scenes/getAllv2');
-const newJAVScenes = ref(dataScenes._rawValue.Scenes);
-newJAVScenes._rawValue.forEach(element => {
-    if (dataJav._rawValue.Scenes.find((objScene) => objScene.id === element.id)) {
+const newJAVCategories = categoriesData;
+newJAVCategories.forEach(element => {
+    if (javData.categories.find((objCategory) => objCategory.id === element.id)) {
         element.selected = true;
     } else {
         element.selected = false;
     }
 });
 
-const { data: dataCategories } = await useFetch('https://jav.souzou.dev/categories/v2');
-const newJAVCategories = ref(dataCategories._rawValue.Categories);
-newJAVCategories._rawValue.forEach(element => {
-    if (dataJav._rawValue.Categories.find((objCategory) => objCategory.id === element.id)) {
-        element.selected = true;
-    } else {
-        element.selected = false;
-    }
-});
-
-const { data: dataIdols } = await useFetch('https://jav.souzou.dev/idols/getAllv2');
-const newJAVIdols = ref(dataIdols._rawValue.Idols);
-newJAVIdols._rawValue.forEach(element => {
-    if (dataJav._rawValue.Idols.find((objIdol) => objIdol.id === element.id)) {
+const newJAVIdols = idolsData;
+newJAVIdols.forEach(element => {
+    if (javData.idols.find((objIdol) => objIdol.id === element.id)) {
         element.selected = true;
     } else {
         element.selected = false;
@@ -173,7 +202,7 @@ newJAVIdols._rawValue.forEach(element => {
 });
 
 const changeUrlImg = async () => {
-    imgPreview = "https://d27vxor1f495av.cloudfront.net/javs/" + newJAVCode + ".jpg";
+    imgPreview = newJAVPoster;
     imgCodePreview._rawValue.src = imgPreview;
 }
 
@@ -184,24 +213,16 @@ const updateJav = async () => {
     myHeaders.append("authorization", cookieBearer);
 
     let tempCategories = [];
-    newJAVCategories._rawValue.forEach(element => {
+    newJAVCategories.forEach(element => {
         if (element.selected) {
-            console.log(element.selected);
             tempCategories.push(element);
         }
     });
 
     let tempIdols = [];
-    newJAVIdols._rawValue.forEach(element => {
+    newJAVIdols.forEach(element => {
         if (element.selected) {
             tempIdols.push(element);
-        }
-    });
-
-    let tempScenes = [];
-    newJAVScenes._rawValue.forEach(element => {
-        if (element.selected) {
-            tempScenes.push(element);
         }
     });
 
@@ -211,18 +232,25 @@ const updateJav = async () => {
         tempJAVHide = 1;
     }
 
-    const { data, error } = await useFetch('https://jav.souzou.dev/javs/updateJavv2', {
+    console.log(tempCategories)
+    console.log(tempIdols)
+
+    const { data, error } = await useFetch(api+'/javs/updateJav', {
         method: 'PATCH',
         headers: myHeaders,
         body: {
             id: id,
-            title: newJAVTitle,
             code: newJAVCode,
-            image: imgPreview,
+            title: newJAVTitle,            
+            release_date: newJAVDate,
+            video: newJAVVideo,
+            static: newJAVStatic,
+            preview: newJAVPreview,
+            poster: newJAVPoster,
+            vtt: newJAVVtt,
             hide: tempJAVHide,
             categories: tempCategories,
             idols: tempIdols,
-            scenes: tempScenes
         }
     })
 
@@ -255,17 +283,6 @@ const computedViewIdols = computed({
     }
 });
 
-const computedViewScenes = computed({
-    // getter
-    get() {
-        return viewScenes;
-    },
-    // setter
-    set(newValue) {
-        viewScenes.value = newValue;
-    }
-});
-
 const computedSelectCategories = computed({
     // getter
     get() {
@@ -273,7 +290,7 @@ const computedSelectCategories = computed({
     },
     // setter
     set(newValue) {
-        newJAVCategories.value.forEach(category => {
+        newJAVCategories.forEach(category => {
             if (category.id === newValue) {
                 if (category.selected) {
                     category.selected = false;
@@ -292,31 +309,12 @@ const computedSelectIdols = computed({
     },
     // setter
     set(newValue) {
-        newJAVIdols.value.forEach(idol => {
+        newJAVIdols.forEach(idol => {
             if (idol.id === newValue) {
                 if (idol.selected) {
                     idol.selected = false;
                 } else {
                     idol.selected = true;
-                }
-            }
-        });
-    }
-});
-
-const computedSelectScenes = computed({
-    // getter
-    get() {
-        return newJAVScenes;
-    },
-    // setter
-    set(newValue) {
-        newJAVScenes.value.forEach(scene => {
-            if (scene.id === newValue) {
-                if (scene.selected) {
-                    scene.selected = false;
-                } else {
-                    scene.selected = true;
                 }
             }
         });
@@ -329,7 +327,6 @@ const viewCategoriesContainer = () => {
     } else {
         computedViewCategories.value = true;
         computedViewIdols.value = false;
-        computedViewScenes.value = false;
     }
 };
 
@@ -338,17 +335,6 @@ const viewIdolsContainer = () => {
         computedViewIdols.value = false;
     } else {
         computedViewIdols.value = true;
-        computedViewCategories.value = false;
-        computedViewScenes.value = false;
-    }
-};
-
-const viewScenesContainer = () => {
-    if (viewScenes._rawValue) {
-        computedViewScenes.value = false;
-    } else {
-        computedViewScenes.value = true;
-        computedViewIdols.value = false;
         computedViewCategories.value = false;
     }
 };
@@ -359,10 +345,6 @@ const addCategory = (_id) => {
 
 const addIdol = (_id) => {
     computedSelectIdols.value = _id;
-};
-
-const addScene = (_id) => {
-    computedSelectScenes.value = _id;
 };
 
 </script>

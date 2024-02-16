@@ -1,5 +1,5 @@
 <template>
-  <div class="container ">
+  <div class="container">
     <div class="row my-2 py-1">
       <div class="col-lg-12 text-center">
         <div class="alert alert-dark" role="alert">

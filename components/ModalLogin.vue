@@ -6,7 +6,7 @@
                     <div class="division">
                         <div class="row row-title my-4 py-2">
                             <div class="col-lg-12 text-center">
-                                <h6>Jav4free Area</h6>
+                                <h6 class="title">Jav4free Area</h6>
                             </div>
                         </div>
                     </div>

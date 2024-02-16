@@ -16,11 +16,11 @@
                                 <a :href="'/dashboard/javs/' + prevPage">{{ prevPage }}</a>
                             </li>
                             <li class="active"><a :href="'/dashboard/javs/' + page">{{ page }}</a></li>
-                            <li v-for="(nextPage, index) in nextPages(page, allJavs.meta.lastPage)"
+                            <li v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)"
                                 :key="index">
                                 <a :href="'/dashboard/javs/' + nextPage ">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < allJavs.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
                             <li v-else><a :href="'/dashboard/javs/' + page ">Next</a></li>
                         </ul>
                     </div>
@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="jav in allJavs.Javs" :key="jav.id">
+                            <tr v-for="jav in javbypage.Javs" :key="jav.id">
                                 <th>{{ jav.code }}</th>
                                 <td>{{ jav.hide }}</td>
                                 <td>
@@ -75,6 +75,8 @@ definePageMeta({
     layout: "admin",
 });
 const { isMobile, isTablet } = useDevice();
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
 const route = useRoute();
 let page = route.params.page;
 
@@ -82,7 +84,13 @@ if (page == null || page == "" || page < 1) {
     page = "1";
 }
 
-const { data: allJavs } = await useFetch('https://jav.souzou.dev/aws/stateFiles/javs/?page=' + page);
+const { data: getJavs } = await useFetch(api + '/javs/getalljavbypage?page=' + page);
+
+if (getJavs._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const javbypage = getJavs._value.Response;
 
 const nextClick = () => {
     let nextPage = '/dashboard/javs/' + (parseInt(page) + 1) ;
