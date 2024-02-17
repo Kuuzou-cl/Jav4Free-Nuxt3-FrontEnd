@@ -479,4 +479,25 @@ footer {
 //Admin Page
 #wrapper {
     display: flex;
+    background: #212121;
+
+    .btn-full-width{
+        width: 100%;
+    }
+
+    .table-admin{
+        font-size: 16px;
+        color: #fff;
+    }
+
+    img{
+        height: 150px;
+        width: auto;
+    }
+
+    video{
+        height: 150px;
+        width: auto;
+    }
 }
+

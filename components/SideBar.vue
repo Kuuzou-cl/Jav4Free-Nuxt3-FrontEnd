@@ -11,14 +11,6 @@
             </NuxtLink>
         </li>
         <hr class="sidebar-divider" />
-        <div class="sidebar-heading">Manage Files</div>
-        <li class="nav-item">
-            <NuxtLink to="/dashboard/uploadFile" class="nav-link">
-                <font-awesome-icon icon="fa-solid fa-cloud-arrow-up" />
-                <span>--Upload</span>
-            </NuxtLink>
-        </li>
-        <hr class="sidebar-divider" />
         <div class="sidebar-heading">New Content</div>
         <li class="nav-item">
             <NuxtLink to="/dashboard/javs/new" class="nav-link">
@@ -59,15 +51,7 @@
                 <font-awesome-icon icon="fa-solid fa-tags" />
                 <span>Categories</span>
             </NuxtLink>
-        </li>
-        <!-- Divider -->
-        <hr class="sidebar-divider" />
-        <li class="nav-item">
-            <NuxtLink to="/dashboard/awsFiles" class="nav-link">
-                <font-awesome-icon icon="fa-brands fa-aws" />
-                <span>--Files</span>
-            </NuxtLink>
-        </li>
+        </li>        
         <hr class="sidebar-divider d-none d-md-block" />
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

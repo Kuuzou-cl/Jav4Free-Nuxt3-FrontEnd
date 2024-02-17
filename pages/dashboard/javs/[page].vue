@@ -1,65 +1,61 @@
 <template>
-    <div class="container-fluid">
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>All JAVs</h6>
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">All JAVS</h3>
+                </div>
             </div>
         </div>
-        <div class="container">      
-            <div class="row my-4">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <div class="container-pagination">
-                        <ul class="pagination">
-                            <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/dashboard/javs/' + page">Previous</a></li>
-                            <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/dashboard/javs/' + prevPage">{{ prevPage }}</a>
-                            </li>
-                            <li class="active"><a :href="'/dashboard/javs/' + page">{{ page }}</a></li>
-                            <li v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)"
-                                :key="index">
-                                <a :href="'/dashboard/javs/' + nextPage ">{{ nextPage }}</a>
-                            </li>
-                            <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/dashboard/javs/' + page ">Next</a></li>
-                        </ul>
-                    </div>
+        <div class="row mt-4">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <div class="container-pagination">
+                    <ul class="pagination">
+                        <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
+                        <li v-else><a :href="'/dashboard/javs/' + page">Previous</a></li>
+                        <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
+                            <a :href="'/dashboard/javs/' + prevPage">{{ prevPage }}</a>
+                        </li>
+                        <li class="active"><a :href="'/dashboard/javs/' + page">{{ page }}</a></li>
+                        <li v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)" :key="index">
+                            <a :href="'/dashboard/javs/' + nextPage">{{ nextPage }}</a>
+                        </li>
+                        <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
+                        <li v-else><a :href="'/dashboard/javs/' + page">Next</a></li>
+                    </ul>
                 </div>
-            </div>      
-            <div class="row my-2">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table id="example" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Hide</th>
-                                <th>Cover</th>
-                                <th>Edit</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="jav in javbypage.Javs" :key="jav.id">
-                                <th>{{ jav.code }}</th>
-                                <td>{{ jav.hide }}</td>
-                                <td>
-                                    <font-awesome-icon v-if="jav.imageCover != 'false'" icon="fa-solid fa-check"
-                                        class="icon-green" />
-                                    <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
-                                </td>                                
-                                <td>
-                                    <nuxt-link :to="'/dashboard/javs/edit/'+jav.id"
-                                        class="btn button-admin">Edit</nuxt-link>
-                                </td>
-                                <td>
-                                    <button class="btn button-admin">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <table class="table table-bordered table-admin">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Hide</th>
+                            <th>Poster</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="jav in javbypage.Javs" :key="jav.id">
+                            <th>{{ jav.code }}</th>
+                            <td>{{ jav.hide }}</td>
+                            <td>
+                                {{ jav.poster }}
+                            </td>
+                            <td>
+                                <nuxt-link :to="'/dashboard/javs/edit/' + jav.id" class="btn category-title">Edit</nuxt-link>
+                            </td>
+                            <td>
+                                <button class="btn category-title">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -93,12 +89,12 @@ if (getJavs._value.Response == null) {
 const javbypage = getJavs._value.Response;
 
 const nextClick = () => {
-    let nextPage = '/dashboard/javs/' + (parseInt(page) + 1) ;
+    let nextPage = '/dashboard/javs/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/dashboard/javs/' + (parseInt(page) - 1) ;
+    let prevPage = '/dashboard/javs/' + (parseInt(page) - 1);
     return prevPage;
 };
 
