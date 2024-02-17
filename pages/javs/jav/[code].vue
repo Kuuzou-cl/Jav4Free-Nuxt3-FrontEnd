@@ -79,10 +79,10 @@ onMounted(() => {
             fillToContainer: false,
             preload: true,
             posterImage: javData.static,
-            //timelinePreview: {
-            //    file: javData.vtt,
-            //    type: "VTT",
-            //},
+            timelinePreview: {
+                file: javData.vtt,
+                type: "VTT",
+            },
             allowTheatre: false,
             contextMenu: {
                 controls: false

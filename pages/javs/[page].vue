@@ -38,6 +38,7 @@
 <script setup>
 const route = useRoute();
 const { isMobile, isTablet } = useDevice();
+
 let page = route.params.page;
 
 if (isNaN(page)) {

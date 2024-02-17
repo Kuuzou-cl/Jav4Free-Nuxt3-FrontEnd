@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="row my-2 py-1">
-                <div v-for="category in allCategories.Categories" :key="category.id"
+                <div v-for="category in allCategories" :key="category.id"
                         v-bind:class="getColumnsCategories()">
                         <NuxtLink :to="'/categories/' + category.name + '/1'">
                             <button class="btn category-title">
@@ -32,7 +32,13 @@ useHead({
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-const { data: allCategories } = await useFetch(api + '/categories/getCategories');
+const { data: getCategories } = await useFetch(api + '/categories/getCategories');
+
+if (getCategories._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const allCategories = getCategories._value.Response;
 
 const getColumnsCategories = () => {
     if (isMobile || isTablet) {

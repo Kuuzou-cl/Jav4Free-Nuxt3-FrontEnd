@@ -1,15 +1,14 @@
 <template>
-    <div class="container-fluid ">
-        <SearchBar />
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>Searching for " {{ query }} "</h6>
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">Searching AV for " {{ query }} "</h3>
+                </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row my-2">
-                <div v-for="scene in searchData.Scenes" :key="scene.id" v-bind:class="getColumnsScenes()">
-                    <CardScene v-bind:data="scene" />
+            <div class="row">
+                <div v-for="jav in javbysearch.Javs" :key="jav.id" class="col-lg-3">
+                    <CardScene v-bind:data="jav" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -22,11 +21,11 @@
                                 <a :href="'/search/' + query + '/' + prevPage">{{ prevPage }}</a>
                             </li>
                             <li class="active"><a :href="'/search/' + query + '/' + page">{{ page }}</a></li>
-                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, searchData.meta.lastPage)"
+                            <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, javbysearch.lastPage)"
                                 :key="index">
                                 <a :href="'/search/' + query + '/' + nextPage">{{ nextPage }}</a>
                             </li>
-                            <li v-if="page < searchData.meta.lastPage"><a :href="nextClick()">Next</a></li>
+                            <li v-if="page < javbysearch.lastPage"><a :href="nextClick()">Next</a></li>
                             <li v-else><a :href="'/search/' + query + '/' + page">Next</a></li>
                         </ul>
                     </div>
@@ -38,12 +37,33 @@
 
 <script setup>
 const route = useRoute();
+const { isMobile, isTablet } = useDevice();
+
 let page = route.params.page;
 let query = route.params.query;
 
-if (page == null || page == "" || page < 1) {
-    page = "1";
+if (isNaN(page)) {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
+
+if (page == null || page == "" || page < 1) {
+    page = 1;
+}
+
+if (query == null || query == "") {
+    throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
+}
+
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
+const { data: getSearch } = await useFetch(api+'/search/userSearch?keyword=' + query + '&page=' + page);
+
+if (getSearch._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const javbysearch = getSearch._value.Response;
 
 useHead({
     title: '"' + query + '" | Jav4Free | Watch Adult Porn Videos ',
@@ -54,11 +74,6 @@ useHead({
     ]
 })
 
-const { isMobile, isTablet } = useDevice();
-
-const { data: searchData } = await useFetch('https://jav.souzou.dev/search/v2?title=' + query + '&page=' + page);
-
-
 const nextClick = () => {
     let nextPage = '/search/' + query + '/' + (parseInt(page) + 1);
     return nextPage;
@@ -67,11 +82,6 @@ const nextClick = () => {
 const prevClick = () => {
     let prevPage = '/search/' + query + '/' + (parseInt(page) - 1);
     return prevPage;
-};
-
-const pushPage = (page) => {
-    let newPage = parseInt(page);
-    navigateTo('/scenes/' + newPage);
 };
 
 const previousPages = (page) => {
