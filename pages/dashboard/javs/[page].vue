@@ -98,11 +98,6 @@ const prevClick = () => {
     return prevPage;
 };
 
-const pushPage = (page) => {
-    let newPage = parseInt(page);
-    navigateTo('/javs/' + newPage);
-};
-
 const previousPages = (page) => {
     let prevPages = [];
     for (let index = 1; index < Number(page); index++) {

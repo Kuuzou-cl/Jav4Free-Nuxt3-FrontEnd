@@ -50,6 +50,12 @@ definePageMeta({
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-const { data: allCategories } = await useFetch(api + '/categories/getCategories');
+const { data: getCategories } = await useFetch(api + '/categories/getCategories');
+
+if (getCategories._value.Response == null) {
+    throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+}
+
+const allCategories = getCategories._value.Response;
 
 </script>

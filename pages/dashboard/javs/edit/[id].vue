@@ -204,7 +204,7 @@ let javData = getJav._value.Response;
 let categoriesData = getCategories._value.Response;
 let idolsData = getIdols._value.Response;
 
-let newJAVTitle = javData.title;
+let newJAVTitle = javData.title.replace(/'/g, '');
 let newJAVCode = javData.code;
 let newJAVHide = javData.hide;
 let newJAVDate = ref(javData.release_date);
