@@ -16,6 +16,7 @@ export default defineNuxtConfig({
       google_analytics_id: 'GTM-55BGRFG',
       appEnv: 'production',
       apiBase: process.env.NUXT_PUBLIC_API_BASE,
+      apiTokenCloudflare: process.env.API_TOKEN_CLOUDFLARE_IMAGES
     }
   },
   css: ['~/assets/scss/main.scss', '~/assets/scss/main-mobile.scss', '@fortawesome/fontawesome-svg-core/styles.css'],

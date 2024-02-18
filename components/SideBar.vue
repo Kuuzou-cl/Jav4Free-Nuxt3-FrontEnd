@@ -3,11 +3,19 @@
         <NuxtLink to="/dashboard" class="sidebar-brand d-flex align-items-center justify-content-center">
             <div class="sidebar-brand-text mx-3">Dashboard</div>
         </NuxtLink>
-        <hr class="sidebar-divider my-0" />
+        <hr class="sidebar-divider my-0" />        
         <li class="nav-item active">
             <NuxtLink to="/" class="nav-link">
                 <font-awesome-icon icon="fa-solid fa-person-walking-arrow-loop-left" />
                 <span>Return to Site</span>
+            </NuxtLink>
+        </li>
+        <hr class="sidebar-divider" />
+        <div class="sidebar-heading">Cloudflare</div>
+        <li class="nav-item">
+            <NuxtLink to="/dashboard/cloudflare-images/new" class="nav-link">
+                <font-awesome-icon icon="fa-solid fa-square-plus" />
+                <span>New Image</span>
             </NuxtLink>
         </li>
         <hr class="sidebar-divider" />
