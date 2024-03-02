@@ -28,34 +28,10 @@
                     <input v-model="newJAVDate" id="startDate" class="form-control" type="date" />
                 </div>
                 <div class="row">
-                    <label class="title">JAV Video Link</label>
-                </div>
-                <div class="row mb-4">
-                    <input v-model="newJAVVideo" class="input-admin" placeholder="Enter JAV title, no characters limit" />
-                </div>
-                <div class="row">
-                    <label class="title">JAV Static Image</label>
-                </div>
-                <div class="row mb-4">
-                    <input v-model="newJAVStatic" placeholder="Enter JAV title, no characters limit" />
-                </div>
-                <div class="row">
-                    <label class="title">JAV Preview</label>
-                </div>
-                <div class="row mb-4">
-                    <input v-model="newJAVPreview" class="input-admin" placeholder="Enter JAV title, no characters limit" />
-                </div>
-                <div class="row">
                     <label class="title">JAV Poster</label>
                 </div>
                 <div class="row mb-4">
                     <input v-model="newJAVPoster" class="input-admin" placeholder="Enter JAV title, no characters limit" />
-                </div>
-                <div class="row">
-                    <label class="title">JAV VTT</label>
-                </div>
-                <div class="row mb-4">
-                    <input v-model="newJAVVtt" class="input-admin" placeholder="Enter JAV title, no characters limit" />
                 </div>
             </div>
             <div class="col-lg-6">
@@ -224,11 +200,7 @@ let newJAVTitle = "";
 let newJAVCode = "";
 let newJAVHide = true;
 let newJAVDate = ref("");
-let newJAVVideo = "";
-let newJAVStatic = "";
-let newJAVPreview = "";
 let newJAVPoster = "";
-let newJAVVtt = "";
 
 const newJAVCategories = categoriesData;
 newJAVCategories.forEach(element => {
@@ -241,6 +213,10 @@ newJAVIdols.forEach(element => {
 });
 
 const changeUrlImg = async () => {
+    let newJAVVideo = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'.mp4';
+    let newJAVStatic = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-static.png';
+    let newJAVPreview = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-preview.mp4';
+
     imgPosterPreview = newJAVPoster;
     imgStaticPreview = newJAVStatic;
     videoPreview = newJAVPreview;
@@ -287,11 +263,7 @@ const postJav = async () => {
             code: newJAVCode,
             title: newJAVTitle,
             release_date: newJAVDate,
-            video: newJAVVideo,
-            static: newJAVStatic,
-            preview: newJAVPreview,
             poster: newJAVPoster,
-            vtt: newJAVVtt,
             hide: tempJAVHide,
             categories: tempCategories,
             idols: tempIdols
@@ -370,6 +342,7 @@ const viewCategoriesContainer = () => {
         computedViewCategories.value = false;
     } else {
         computedViewCategories.value = true;
+        computedViewIdols.value = false;
     }
 };
 
@@ -378,6 +351,7 @@ const viewIdolsContainer = () => {
         computedViewIdols.value = false;
     } else {
         computedViewIdols.value = true;
+        computedViewCategories.value = false;
     }
 };
 
