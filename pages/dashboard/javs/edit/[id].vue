@@ -299,7 +299,7 @@ const updateJav = async () => {
             vtt: newJAVVtt,
             hide: tempJAVHide,
             categories: tempCategories,
-            idols: tempIdols,
+            idols: tempIdols
         }
     })
 

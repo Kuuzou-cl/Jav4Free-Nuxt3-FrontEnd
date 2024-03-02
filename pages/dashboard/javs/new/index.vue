@@ -1,129 +1,178 @@
 <template>
-    <div class="container-fluid">
-        <div class="row row-title my-2 py-1">
-            <div class="col-lg-12 text-center">
-                <h6>New Jav</h6>
+    <div class="container">
+        <div class="row my-2 py-1">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="title">New JAV</h3>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row my-4">
-                <div class="col-lg-6 ">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Code</label>
-                            <input v-model="newJAVCode" class="input-admin"
-                                placeholder="Enter JAV code, example 'ABC-000'" />
+        <div class="row my-4">
+            <div class="col-lg-6">
+                <div class="row">
+                    <label class="title">JAV Code</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVCode" class="input-admin" placeholder="Enter JAV code, example 'ABC-000'" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV Title</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVTitle" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <label class="title">Release Date</label>
+                </div>
+                <div class="row mb-2">
+                    <input v-model="newJAVDate" id="startDate" class="form-control" type="date" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV Video Link</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVVideo" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV Static Image</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVStatic" placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV Preview</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVPreview" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV Poster</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVPoster" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <label class="title">JAV VTT</label>
+                </div>
+                <div class="row mb-4">
+                    <input v-model="newJAVVtt" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row justify-content-center mb-4">
+                    <button class="btn category-title" @click="changeUrlImg()">
+                        Reload Files
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <h6 class="title">JAV Poster</h6>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <img ref="imgElementPreview" :src="imgPosterPreview" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Title</label>
-                            <input v-model="newJAVTitle" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <h6 class="title">JAV Static</h6>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <img ref="imgElementStatic" :src="imgStaticPreview" />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">Release Date</label>
-                            <input v-model="newJAVDate" id="startDate" class="form-control" type="date" />
-                            {{ newJAVDate }}
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <h6 class="title">JAV Preview</h6>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <video ref="videoElementPreview" controls>
+                                <source :src="videoPreview" type="video/mp4">
+                            </video>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Video Link</label>
-                            <input v-model="newJAVVideo" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
+                    <div class="col-lg-6 text-center">
+                        <div class="row">
+                            <h6 class="title">JAV</h6>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <video ref="videoElementFull" controls>
+                                <source :src="videoFull" type="video/mp4">
+                            </video>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Static Image</label>
-                            <input v-model="newJAVStatic" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="row">
+                            <label class="title">Hidden</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Preview</label>
-                            <input v-model="newJAVPreview" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV Poster</label>
-                            <input v-model="newJAVPoster" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">JAV VTT</label>
-                            <input v-model="newJAVVtt" class="input-admin"
-                                placeholder="Enter JAV title, no characters limit" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="title-input-admin">Hidden</label>
+                        <div class="row justify-content-center mb-4">
                             <input type="checkbox" class="input-admin" v-model="newJAVHide" />
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 d-flex justify-content-center">
-                    <div class="row">
-                        <div class="col-lg-12 d-flex justify-content-center">
-                            <img class="preview-img-jav" ref="imgCodePreview" :src="imgPreview" />
-                        </div>
-                        <button class="btn btn-warning" @click="changeUrlImg()">
-                            Reload Cover
-                        </button>
-                    </div>
-                </div>
             </div>
-            <div class="row my-2">
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <button class="btn btn-warning btn-block" @click="viewCategoriesContainer()">
-                        View Categories
-                    </button>
-                </div>
-                <div class="col-lg-4 d-flex justify-content-center">
-                    <button class="btn btn-warning btn-block" @click="viewIdolsContainer()">
-                        View Idols
-                    </button>
-                </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-lg-6 d-flex justify-content-center">
+                <button class="btn btn-warning btn-block" @click="viewCategoriesContainer()">
+                    View Categories
+                </button>
             </div>
-            <div class="row my-2" :class="{ hidden: !viewCategories }">
-                <div v-for="category in newJAVCategories" :key="category.id"
-                    class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
-                    <button v-if="category.selected" class="active btn btn-light btn-sm btn-category-admin"
-                        @click="addCategory(category.id)">
-                        {{ category.name }}
-                    </button>
-                    <button v-else class="btn btn-light btn-sm btn-category-admin" @click="addCategory(category.id)">
-                        {{ category.name }}
-                    </button>
-                </div>
+            <div class="col-lg-6 d-flex justify-content-center">
+                <button class="btn btn-warning btn-block" @click="viewIdolsContainer()">
+                    View Idols
+                </button>
             </div>
-            <div class="row my-2" :class="{ hidden: !viewIdols }">
-                <div v-for="idol in newJAVIdols" :key="idol.id"
-                    class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
-                    <button v-if="idol.selected" class="active btn btn-light btn-sm btn-category-admin"
-                        @click="addIdol(idol.id)">
-                        {{ idol.name }}
-                    </button>
-                    <button v-else class="btn btn-light btn-sm btn-category-admin" @click="addIdol(idol.id)">
-                        {{ idol.name }}
-                    </button>
-                </div>
+        </div>
+        <div class="row my-2" :class="{ hidden: !viewCategories }">
+            <div v-for="category in newJAVCategories" :key="category.id"
+                class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
+                <button v-if="category.selected" class="active btn btn-info btn-full-width my-2"
+                    @click="addCategory(category.id)">
+                    {{ category.name }}
+                </button>
+                <button v-else class="btn btn-outline-info btn-full-width my-2" @click="addCategory(category.id)">
+                    {{ category.name }}
+                </button>
             </div>
-            <div class="row my-2">
-                <div class="col-lg-12 d-flex justify-content-center">
-                    <button class="btn btn-success" @click="postJav()">
-                        New JAV
-                    </button>
-                </div>
+        </div>
+        <div class="row my-2" :class="{ hidden: !viewIdols }">
+            <div v-for="idol in newJAVIdols" :key="idol.id"
+                class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
+                <button v-if="idol.selected" class="active btn btn-info btn-full-width my-2"
+                    @click="addIdol(idol.id)">
+                    {{ idol.name }}
+                </button>
+                <button v-else class="btn btn-outline-info btn-full-width my-2" @click="addIdol(idol.id)">
+                    {{ idol.name }}
+                </button>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <button class="btn btn-success" @click="postJav()">
+                    New JAV
+                </button>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <table class="table table-bordered table-admin">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="jav in pendingJAVData.javObjects">
+                            <th>{{ jav }}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -145,23 +194,31 @@ let id = route.params.id;
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-const imgCodePreview = ref(0);
+const imgElementPreview = ref(0);
+const imgElementStatic = ref(0);
+const videoElementPreview = ref(0);
+const videoElementFull = ref(0);
 
-let imgPreview = "";
+let imgPosterPreview = "";
+let imgStaticPreview = "";
+let videoPreview = "";
+let videoFull = "";
 
 const viewCategories = ref(false);
 const viewIdols = ref(false);
 
 const { data: getCategories } = await useFetch(api + '/categories/getCategories');
 const { data: getIdols } = await useFetch(api + '/idols/getIdols');
+const { data: getPendingJAV } = await useFetch(api + '/cloudflare/list_bucket');
 
-if (!getCategories._value.Response || !getIdols._value.Response) {
+if (!getCategories._value.Response || !getIdols._value.Response || !getPendingJAV._value.Response) {
     console.log('NULL Jav');
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
 }
 
 let categoriesData = getCategories._value.Response;
 let idolsData = getIdols._value.Response;
+let pendingJAVData = getPendingJAV._value.Response;
 
 let newJAVTitle = "";
 let newJAVCode = "";
@@ -172,8 +229,6 @@ let newJAVStatic = "";
 let newJAVPreview = "";
 let newJAVPoster = "";
 let newJAVVtt = "";
-
-
 
 const newJAVCategories = categoriesData;
 newJAVCategories.forEach(element => {
@@ -186,8 +241,15 @@ newJAVIdols.forEach(element => {
 });
 
 const changeUrlImg = async () => {
-    imgPreview = newJAVPoster;
-    imgCodePreview._rawValue.src = imgPreview;
+    imgPosterPreview = newJAVPoster;
+    imgStaticPreview = newJAVStatic;
+    videoPreview = newJAVPreview;
+    videoFull = newJAVVideo;
+
+    imgElementPreview._rawValue.src = imgPosterPreview;
+    imgElementStatic._rawValue.src = imgStaticPreview;
+    videoElementPreview._rawValue.src = videoPreview;
+    videoElementFull._rawValue.src = videoFull;
 }
 
 const postJav = async () => {
@@ -197,27 +259,40 @@ const postJav = async () => {
     myHeaders.append("authorization", cookieBearer);
 
     let tempCategories = [];
-    newJAVCategories._rawValue.forEach(element => {
+    newJAVCategories.forEach(element => {
         if (element.selected) {
-            tempCategories.push(element.id);
+            tempCategories.push(element);
         }
     });
 
     let tempIdols = [];
-    newJAVIdols._rawValue.forEach(element => {
+    newJAVIdols.forEach(element => {
         if (element.selected) {
-            tempIdols.push(element.id);
+            tempIdols.push(element);
         }
     });
 
-    const { data, error } = await useFetch('https://jav.souzou.dev/javs/newjavv2', {
+    let tempJAVHide = 0;
+
+    if (newJAVHide) {
+        tempJAVHide = 1;
+    }
+
+    newJAVTitle = newJAVTitle.replace(/'/g, '');
+
+    const { data, error } = await useFetch(api + '/javs/newJav', {
         method: 'POST',
         headers: myHeaders,
         body: {
-            title: newJAVTitle,
             code: newJAVCode,
-            image: imgPreview,
-            hide: newJAVHide,
+            title: newJAVTitle,
+            release_date: newJAVDate,
+            video: newJAVVideo,
+            static: newJAVStatic,
+            preview: newJAVPreview,
+            poster: newJAVPoster,
+            vtt: newJAVVtt,
+            hide: tempJAVHide,
             categories: tempCategories,
             idols: tempIdols
         }
