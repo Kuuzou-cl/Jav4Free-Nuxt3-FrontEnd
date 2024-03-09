@@ -8,7 +8,7 @@
         <div class="container">       
             <div class="row my-2">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table id="example" class="table table-striped table-bordered">
+                    <table id="example" class="table table-bordered table-admin">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -17,14 +17,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="category in allCategories.Categories" :key="category.id">
+                            <tr v-for="category in allCategories" :key="category.id">
                                 <th>{{ category.name }}</th>                            
                                 <td>
                                     <nuxt-link :to="'/dashboard/categories/edit/'+category.id"
-                                        class="btn button-admin">Edit</nuxt-link>
+                                        class="btn category-title">Edit</nuxt-link>
                                 </td>
                                 <td>
-                                    <button class="btn button-admin">
+                                    <button class="btn category-title">
                                         Delete
                                     </button>
                                 </td>

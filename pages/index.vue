@@ -63,8 +63,9 @@
         <div class="col-lg-12 text-center">
           <div class="alert alert-dark" role="alert">
             Most Viewed Pornstars
-            <button class="btn btn-dark">View More <font-awesome-icon icon="fa-solid fa-circle-play" />
-            </button>
+            <NuxtLink to="/av-idol/1" tag="button" class="btn btn-dark">View More <font-awesome-icon
+                icon="fa-solid fa-circle-play" />
+            </NuxtLink>
           </div>
         </div>
       </div>

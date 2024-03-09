@@ -28,7 +28,7 @@
             </div>      
             <div class="row my-2">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <table id="example" class="table table-striped table-bordered">
+                    <table id="example" class="table table-bordered table-admin">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -41,16 +41,16 @@
                             <tr v-for="idol in idolsbypage.Idols" :key="idol.id">
                                 <th>{{ idol.name }}</th>
                                 <td>
-                                    <font-awesome-icon v-if="idol.image != 'false'" icon="fa-solid fa-check"
+                                    <font-awesome-icon v-if="idol.poster != ''" icon="fa-solid fa-check"
                                         class="icon-green" />
                                     <font-awesome-icon v-else icon="fa-solid fa-xmark" class="icon-red" />
                                 </td>                                
                                 <td>
                                     <nuxt-link :to="'/dashboard/idols/edit/'+idol.id"
-                                        class="btn button-admin">Edit</nuxt-link>
+                                        class="btn category-title">Edit</nuxt-link>
                                 </td>
                                 <td>
-                                    <button class="btn button-admin">
+                                    <button class="btn category-title">
                                         Delete
                                     </button>
                                 </td>
