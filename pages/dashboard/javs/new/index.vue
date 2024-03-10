@@ -213,7 +213,7 @@ newJAVIdols.forEach(element => {
 });
 
 const changeUrlImg = async () => {
-    let newJAVVideo = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'.mp4';
+    let newJAVVideo = 'https://pub-865fcc8bf84042a28d420f7e080a6093.r2.dev/'+ newJAVCode +'%2F'+ newJAVCode +'.mp4';
     let newJAVStatic = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-static.png';
     let newJAVPreview = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-preview.mp4';
 
