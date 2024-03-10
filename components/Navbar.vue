@@ -16,7 +16,7 @@
                         </NuxtLink>
                     </li>
                     <li class="nav-item">
-                        <NuxtLink to="/javs/1" tag="a" class="nav-link">
+                        <NuxtLink to="/weekly-top/1" tag="a" class="nav-link">
                             Weekly top
                         </NuxtLink>
                     </li>

@@ -8,7 +8,7 @@
         </div>
         <div class="card-banner2">
             <span class="card-name">
-                <b>42 Videos</b>
+                <b>{{ data.quantity }} Videos</b>
             </span>
         </div>
     </NuxtLink>
