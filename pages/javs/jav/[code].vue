@@ -88,6 +88,14 @@ onMounted(() => {
                 controls: false
             }
         },
+        vastOptions: {
+            adList: [
+                {
+                    "roll": "preRoll",
+                    "vastTag": "https://s.magsrv.com/splash.php?idzone=5243150"
+                },
+            ]
+        },
         onBeforeXMLHttpRequest: (request) => {
             request.withCredentials = false;
         },
