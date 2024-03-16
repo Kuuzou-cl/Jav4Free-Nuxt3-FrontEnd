@@ -92,11 +92,12 @@ onMounted(() => {
             adList: [
                 {
                     "roll": "preRoll",
-                    "vastTag": "https://s.magsrv.com/splash.php?idzone=5243150"
+                    "vastTag": "https://s.magsrv.com/splash.php?idzone=5243940"
                 },
             ]
         },
         onBeforeXMLHttpRequest: (request) => {
+            console.log(request);
             request.withCredentials = false;
         },
     });
