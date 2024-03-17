@@ -11,7 +11,7 @@
                 <div class="movie-tag movie-tag-1">{{ props.data.categories[0].name }}</div>
                 <div class="movie-tag movie-tag-1">{{ props.data.categories[1].name }}</div>
             </div>
-            <p v-if="!isMobile" class="movie-description">
+            <p class="movie-description">
                 {{ shortTitle(props.data.title) }}
             </p>
             <div class="movie-title">

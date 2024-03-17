@@ -1,81 +1,21 @@
-/* Large desktop */
-@media (min-width: 1200px) {}
+@media (min-width:320px) {
 
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-
-    //Card Scene
-    .card-scene .title {
-        font-size: 14px;
-        margin: 0;
-        font-weight: 260 !important;
-    }
-
-    //Card Jav Carousel
+    /* smartphones, iPhone, portrait 480x320 phones */
+    //Card Jav 
     .movie {
-
-        .heading-primary {
-            font-size: 12px;
-        }
-
-        .movie-description {
-            font-size: 10px;
-        }
-
-        .movie-tag {
-            font-size: 10px;
-        }
-    }
-
-    .info {
-        font-size: 12px;
-    }
-
-    .container-scene {
-    
-        .info {
-            font-size: 10px;
-        }
-        
-        .info-categories {
-            font-size: 8px;
-        }
-        
-        .info-idols {
-            font-size: 9px;
-        }
-    }
-
-}
-
-/* Landscape phones and down */
-@media (max-width: 480px) {
-
-    //Navbar
-    nav {
-        .nav-link {
-            color: #FFF !important;
-        }
-    }
-
-    //Pagination
-    .pages-number {
-        display: none;
-    }
-
-    //Card Jav Carousel
-    .movie {
+        display: flow;
 
         .movie-hero {
-            flex: 0 0 60%;
-        }
+            width: 100%;
 
-        .movie-content {
-            padding: 20px 20px;
+            .movie-img {
+                width: 100%;
+                display: block;
+            }
         }
 
         .movie-title {
-            display: block;
+            padding: 5px 20px 5px 20px;
         }
 
         .heading-primary {
@@ -86,30 +26,148 @@
             font-size: 10px;
         }
 
-        .movie-tag-1 {
-            background-color: #ff5858;
-        }
-
-        .movie-tag-2 {
-            background-color: #ff8d58;
-        }
-
-        .movie-tag-3 {
-            display: none;
-        }
-
         .movie-description {
-            display: none;
-        }
-
-        .movie-price {
-            display: none;
+            font-size: 12px;
         }
     }
 
     //Card Idol
     .card-idol {
-        max-width: 200px;
+        margin-top: 5px;
     }
 
+    //btn categories
+    .btn-dark {
+        width: 100%;
+        margin: 5px 10px 5px 10px;
+    }
+}
+
+@media (min-width:481px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width:641px) {
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+}
+
+@media (min-width:961px) {
+
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    //Card Jav 
+    .movie {
+        border-radius: 5px;
+        display: flex;
+        text-decoration: none !important;
+
+        .movie-hero {
+            width: 60%;
+
+            .movie-img {
+                width: 100%;
+                display: block;
+            }
+        }
+
+        .movie-content {
+            background-color: #212121;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .movie-title {
+            padding: 10px 20px 0px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .heading-primary {
+            font-size: 14px;
+            margin-right: auto;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .movie-tag {
+            font-size: 12px;
+            color: #fff;
+            padding: 2px 7px;
+            border-radius: 100px;
+            margin-right: 5%;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .movie-tag-1 {
+            background-color: #D2042D;
+        }
+
+        .movie-description {
+            font-size: 12px;
+            color: #ffffff8c;
+            letter-spacing: 1px;
+            padding: 10px 20px 0px 20px;
+            margin: 0%;
+        }
+
+        .movie-tag-idol {
+            background-color: #790604;
+        }
+    }
+
+    //Card Idol
+    .card-idol {
+        position: relative;
+        overflow: hidden;
+        border: 0;
+        border-radius: 0;
+        background: #000000 !important;
+        font-size: 14px;
+
+        img {
+            z-index: 1;
+            width: 100% !important;
+            height: auto;
+        }
+
+        .card-banner {
+            top: 0%;
+            left: 0%;
+            color: #fff;
+            margin: 2%;
+            padding: 1%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            background: #D2042D;
+        }
+
+        .card-banner2 {
+            bottom: 0%;
+            right: 0%;
+            color: #fff;
+            margin: 2%;
+            padding: 1%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            background: #212121;
+        }
+
+    }
+}
+
+@media (min-width:1025px) {
+    /* big landscape tablets, laptops, and desktops */
+}
+
+@media (min-width:1281px) {
+    /* hi-res laptops and desktops */
 }

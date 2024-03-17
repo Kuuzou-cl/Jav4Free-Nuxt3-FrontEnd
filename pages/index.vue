@@ -15,7 +15,14 @@
         </div>
       </div>
     </div>
-    <div class="row my-2 py-1">
+    <div v-if="isMobile" class="row my-2 py-1">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <iframe src="//a.magsrv.com/iframe.php?idzone=5244428&size=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+    <div v-if="isDesktop" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
           <iframe src="//a.magsrv.com/iframe.php?idzone=4445412&size=728x90" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
@@ -55,7 +62,14 @@
         </div>
       </div>
     </div>
-    <div class="row my-2 py-1">
+    <div v-if="isMobile" class="row my-2 py-1">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <iframe src="//a.magsrv.com/iframe.php?idzone=5244434&size=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+    <div v-if="isDesktop" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
           <iframe src="//a.magsrv.com/iframe.php?idzone=5243932&size=728x90" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
@@ -69,7 +83,7 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div v-for="idol in randomIdols" :key="idol.id" class="col-lg-2">
+        <div v-for="idol in randomIdols" :key="idol.id" :class="getColumnsScenes()">
           <CardIdol v-bind:data="idol" />
         </div>
       </div>
@@ -89,7 +103,7 @@
 
 <script setup>
 
-const { isMobile, isTablet } = useDevice();
+const { isDesktop, isMobile, isTablet } = useDevice();
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
@@ -106,12 +120,12 @@ let randomIdols = getIdols._value.Response;
 
 const getColumnsScenes = () => {
   if (isMobile) {
-    return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
+    return 'col-lg-6 col-md-6 col-sm-6 col-6 d-flex'
   } else {
     if (isTablet) {
-      return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
+      return 'col-lg-6 col-md-6 col-sm-6'
     } else {
-      return 'col-lg-6 col-md-6 col-sm-6 col-xs-6'
+      return 'col-lg-2 col-md-2 col-sm-2 d-flex'
     }
   }
 };
