@@ -128,12 +128,14 @@ let count = 0;
 for (let index = 0; index < newestJavsbyId.length; index++) {
   if (!newestJavs.find((obj) => obj.id === newestJavsbyId[index].id)) {
     newestJavs.push(newestJavsbyId[index]);
-    count++;
+    count = count + 1;
   } 
   if (count == 2) {
+    console.log("break");
     break;
   }
 }
+
 const getColumnsScenes = () => {
   if (isMobile) {
     return 'col-lg-6 col-md-6 col-sm-6 col-6 d-flex'
