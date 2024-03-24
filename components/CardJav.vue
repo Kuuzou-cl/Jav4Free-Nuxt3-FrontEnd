@@ -15,7 +15,7 @@
                 {{ shortTitle(props.data.title) }}
             </p>
             <div class="movie-title">
-                <div class="movie-tag movie-tag-idol">{{ props.data.idols[0].name }}</div>
+                <div v-if="props.data.idols[0]" class="movie-tag movie-tag-idol">{{ props.data.idols[0].name }}</div>
             </div>
         </div>
     </NuxtLink>

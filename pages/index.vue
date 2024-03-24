@@ -124,16 +124,10 @@ let hotCategories = getCategories._value.Response;
 let latestHomeJavs = getJavs._value.Response;
 let randomIdols = getIdols._value.Response;
 
-let count = 0;
 for (let index = 0; index < newestJavsbyId.length; index++) {
-  if (!newestJavs.find((obj) => obj.id === newestJavsbyId[index].id)) {
+  if (!newestJavs.find((obj) => obj.id === newestJavsbyId[index].id) && newestJavs.length < 4 ) {
     newestJavs.push(newestJavsbyId[index]);
-    count = count + 1;
   } 
-  if (count == 2) {
-    console.log("break");
-    break;
-  }
 }
 
 const getColumnsScenes = () => {
