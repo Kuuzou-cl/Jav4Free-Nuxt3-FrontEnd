@@ -8,6 +8,44 @@
             </div>
         </div>
         <div class="row my-4">
+            <div class="col-lg-3">
+                <div class="row">
+                    <label class="title">Select file</label>
+                </div>
+                <div class="row mb-4">
+                    <input class="form-control form-control-sm" ref="formFile" type="file">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <label class="title">Variants Created</label>
+                </div>
+                <div class="row mb-4">
+                    <table class="table table-bordered table-admin" v-if="renderComponent">
+                        <thead>
+                            <tr>
+                                <th>Url</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="url in variantsURL">
+                                <th>{{ url }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="row">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <button class="btn btn-success" @click="postImage()">
+                            Upload Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-4">
             <div class="col-lg-6">
                 <div class="row">
                     <label class="title">JAV Code</label>
@@ -19,7 +57,8 @@
                     <label class="title">JAV Title</label>
                 </div>
                 <div class="row mb-4">
-                    <input v-model="newJAVTitle" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                    <input v-model="newJAVTitle" class="input-admin"
+                        placeholder="Enter JAV title, no characters limit" />
                 </div>
                 <div class="row">
                     <label class="title">Release Date</label>
@@ -31,7 +70,8 @@
                     <label class="title">JAV Poster</label>
                 </div>
                 <div class="row mb-4">
-                    <input v-model="newJAVPoster" class="input-admin" placeholder="Enter JAV title, no characters limit" />
+                    <input v-model="newJAVPoster" class="input-admin"
+                        placeholder="Enter JAV title, no characters limit" />
                 </div>
             </div>
             <div class="col-lg-6">
@@ -119,8 +159,7 @@
         <div class="row my-2" :class="{ hidden: !viewIdols }">
             <div v-for="idol in newJAVIdols" :key="idol.id"
                 class="col-lg-3 col-md-3 col-sm-3 col-xs-3 d-flex justify-content-center">
-                <button v-if="idol.selected" class="active btn btn-info btn-full-width my-2"
-                    @click="addIdol(idol.id)">
+                <button v-if="idol.selected" class="active btn btn-info btn-full-width my-2" @click="addIdol(idol.id)">
                     {{ idol.name }}
                 </button>
                 <button v-else class="btn btn-outline-info btn-full-width my-2" @click="addIdol(idol.id)">
@@ -164,11 +203,14 @@ definePageMeta({
     layout: "admin",
 });
 
-const route = useRoute();
-let id = route.params.id;
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
+
+const formFile = ref(0);
+const renderComponent = ref(true);
+
+let variantsURL = [];
 
 const imgElementPreview = ref(0);
 const imgElementStatic = ref(0);
@@ -213,9 +255,9 @@ newJAVIdols.forEach(element => {
 });
 
 const changeUrlImg = async () => {
-    let newJAVVideo = 'https://pub-865fcc8bf84042a28d420f7e080a6093.r2.dev/'+ newJAVCode +'%2F'+ newJAVCode +'.mp4';
-    let newJAVStatic = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-static.png';
-    let newJAVPreview = 'https://r2.jav4free.watch/'+ newJAVCode +'%2F'+ newJAVCode +'-preview.mp4';
+    let newJAVVideo = 'https://pub-865fcc8bf84042a28d420f7e080a6093.r2.dev/' + newJAVCode + '%2F' + newJAVCode + '.mp4';
+    let newJAVStatic = 'https://r2.jav4free.watch/' + newJAVCode + '%2F' + newJAVCode + '-static.png';
+    let newJAVPreview = 'https://r2.jav4free.watch/' + newJAVCode + '%2F' + newJAVCode + '-preview.mp4';
 
     imgPosterPreview = newJAVPoster;
     imgStaticPreview = newJAVStatic;
@@ -226,6 +268,46 @@ const changeUrlImg = async () => {
     imgElementStatic._rawValue.src = imgStaticPreview;
     videoElementPreview._rawValue.src = videoPreview;
     videoElementFull._rawValue.src = videoFull;
+}
+
+const postImage = async () => {
+    const cookieToken = useCookie('token');
+    const cookieBearer = 'Bearer ' + cookieToken.value;
+    const myHeaders = new Headers();
+    myHeaders.append("authorization", cookieBearer);
+
+    const { data: getURL } = await useFetch(api + '/javs/generateUploadUrl', {
+        method: 'POST',
+        headers: myHeaders
+    })
+
+    console.log(getURL._value.Response.result.uploadURL);
+
+    if (!getURL._value.Response) {
+        throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
+    }
+    let urlToUpload = getURL._value.Response.result.uploadURL;
+
+    const formdata = new FormData();
+    formdata.append("file", formFile._value.files[0], formFile._value.files[0].name);
+
+    const requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow"
+    };
+
+    console.log(urlToUpload)
+
+    renderComponent.value = false;
+
+    const { data: getURLImage } = await useFetch(urlToUpload, requestOptions);
+
+    variantsURL = getURLImage._value.result.variants;
+
+    console.log(variantsURL);
+    console.log(getURLImage._value.result.variants);
+    renderComponent.value = true;
 }
 
 const postJav = async () => {
