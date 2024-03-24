@@ -18,14 +18,16 @@
     <div v-if="isMobile" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <iframe src="//a.magsrv.com/iframe.php?idzone=5244428&size=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          <iframe src="//a.magsrv.com/iframe.php?idzone=5244428&size=300x250" width="300" height="250" scrolling="no"
+            marginwidth="0" marginheight="0" frameborder="0"></iframe>
         </div>
       </div>
     </div>
     <div v-if="isDesktop" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <iframe src="//a.magsrv.com/iframe.php?idzone=4445412&size=728x90" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          <iframe src="//a.magsrv.com/iframe.php?idzone=4445412&size=728x90" width="728" height="90" scrolling="no"
+            marginwidth="0" marginheight="0" frameborder="0"></iframe>
         </div>
       </div>
     </div>
@@ -65,14 +67,16 @@
     <div v-if="isMobile" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <iframe src="//a.magsrv.com/iframe.php?idzone=5244434&size=300x250" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          <iframe src="//a.magsrv.com/iframe.php?idzone=5244434&size=300x250" width="300" height="250" scrolling="no"
+            marginwidth="0" marginheight="0" frameborder="0"></iframe>
         </div>
       </div>
     </div>
     <div v-if="isDesktop" class="row my-2 py-1">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <iframe src="//a.magsrv.com/iframe.php?idzone=5243932&size=728x90" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+          <iframe src="//a.magsrv.com/iframe.php?idzone=5243932&size=728x90" width="728" height="90" scrolling="no"
+            marginwidth="0" marginheight="0" frameborder="0"></iframe>
         </div>
       </div>
     </div>
@@ -109,15 +113,27 @@ const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
 const { data: getnewestJavs } = await useFetch(api + '/javs/getlatest?limit=' + 2);
+const { data: getnewestJavsbyId } = await useFetch(api + '/javs/getlatest?limit=' + 4 + '&order=id');
 const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + 6);
 const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + 12);
 const { data: getIdols } = await useFetch(api + '/idols/getrandombylimit?limit=' + 6);
 
 let newestJavs = getnewestJavs._value.Response;
+let newestJavsbyId = getnewestJavsbyId._value.Response;
 let hotCategories = getCategories._value.Response;
 let latestHomeJavs = getJavs._value.Response;
 let randomIdols = getIdols._value.Response;
 
+let count = 0;
+for (let index = 0; index < newestJavsbyId.length; index++) {
+  if (!newestJavs.find((obj) => obj.id === newestJavsbyId[index].id)) {
+    newestJavs.push(newestJavsbyId[index]);
+    count++;
+  } 
+  if (count == 2) {
+    break;
+  }
+}
 const getColumnsScenes = () => {
   if (isMobile) {
     return 'col-lg-6 col-md-6 col-sm-6 col-6 d-flex'
