@@ -13,10 +13,8 @@
 definePageMeta({
     middleware: [
         'auth'
-    ]
-});
-definePageMeta({
-    layout: "admin",
+    ],
+    layout: "admin"
 });
 
 </script>

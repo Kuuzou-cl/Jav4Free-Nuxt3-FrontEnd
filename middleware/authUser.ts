@@ -16,7 +16,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             body: { email: cookieEmail },
 
         })
-        if (!data._value.alive || data._value.data.userAdmin == 0) {
+        if (!data._value.alive) {
             return navigateTo('/');
         } else {
             console.log("Entering protected route...");
