@@ -163,13 +163,12 @@
 </template>
 
 <script setup>
+
 definePageMeta({
     middleware: [
         'auth'
-    ]
-});
-definePageMeta({
-    layout: "admin",
+    ],
+    layout: "admin"
 });
 
 const route = useRoute();

@@ -194,15 +194,13 @@
 </template>
 
 <script setup>
+
 definePageMeta({
     middleware: [
         'auth'
-    ]
+    ],
+    layout: "admin"
 });
-definePageMeta({
-    layout: "admin",
-});
-
 
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
