@@ -30,6 +30,16 @@
                             AV Idol
                         </NuxtLink>
                     </li>
+                    <li v-if="stateUser" class="nav-item">
+                        <NuxtLink to="/av-idol/1" tag="a" class="nav-link">
+                            Favorites
+                        </NuxtLink>
+                    </li>
+                    <li class="nav-item">
+                        <NuxtLink to="/history/1" tag="a" class="nav-link">
+                            History
+                        </NuxtLink>
+                    </li>
                 </ul>
                 <div class="search">
                     <input v-model="searching" class="input-search" @keyup.enter="SearchQuery(searching)" type="search"
@@ -48,6 +58,37 @@ let searching = '';
 
 const SearchQuery = (_search) => {
     router.push({ path: '/search/' + searching + '/1' })
+}
+
+const runtimeConfig = useRuntimeConfig();
+const api = runtimeConfig.public.apiBase;
+
+const cookieEmail = useCookie('email');
+const cookieToken = useCookie('token');
+
+let stateUser = false;
+
+if (cookieEmail.value != null && cookieToken.value != null) {
+  const myHeaders = new Headers();
+  myHeaders.append("authorization", cookieToken.value);
+
+  const { data, error } = await useFetch(api + '/users/currentAlive', {
+    method: 'POST',
+    headers: myHeaders,
+    body: { email: cookieEmail },
+
+  })
+
+  if (data._value.alive) {
+    stateUser = data._value.alive
+  } else {
+    stateUser = false;
+    cookieEmail.value = null;
+    cookieToken.value = null;
+  }
+
+} else {
+  stateUser = false;
 }
 
 </script>

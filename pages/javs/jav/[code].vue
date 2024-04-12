@@ -37,7 +37,6 @@
 </template>
 
 <script setup>
-
 const route = useRoute();
 let code = route.params.code;
 
@@ -59,6 +58,7 @@ if (!getJav._value.Response || !getrandomJavs._value.Response) {
 let javData = getJav._value.Response;
 let randomJavData = getrandomJavs._value.Response;
 
+//Set Meta
 useHead({
     title: javData.code + " | Jav4Free | " + javData.title,
     meta: [
@@ -72,6 +72,7 @@ useHead({
     ]
 })
 
+//Mount Video Player
 onMounted(() => {
     var player = fluidPlayer('jav_player', {
         layoutControls: {
@@ -97,10 +98,23 @@ onMounted(() => {
             ]
         },
         onBeforeXMLHttpRequest: (request) => {
-            console.log(request);
             request.withCredentials = false;
         },
     });
 });
+
+//Cookie history
+let historyCookie = useCookie('history')
+if (!historyCookie.value) {
+    historyCookie.value = [];
+}
+let tempCookie = [] = historyCookie.value;
+for (let index = 0; index < tempCookie.length; index++) {
+    if (tempCookie[index] == javData.id) {
+        tempCookie.splice(index,1);
+    }    
+}
+tempCookie.push(javData.id);
+historyCookie.value = JSON.stringify(tempCookie);
 
 </script>

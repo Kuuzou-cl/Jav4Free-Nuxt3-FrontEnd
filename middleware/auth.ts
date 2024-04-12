@@ -19,7 +19,12 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (!data._value.alive || data._value.data.userAdmin == 0) {
             return navigateTo('/');
         } else {
-            console.log("Entering protected route...");
+            const regexAdmin = new RegExp('^\/dashboard');
+            if (data._value.data.userAdmin == 1 && regexAdmin.test(to.path)) {
+                console.log("Entering protected route...");
+            }else{
+                return navigateTo('/');
+            }           
         }
     } else {
         return navigateTo('/');
