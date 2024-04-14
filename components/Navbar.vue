@@ -31,7 +31,7 @@
                         </NuxtLink>
                     </li>
                     <li v-if="stateUser" class="nav-item">
-                        <NuxtLink to="/av-idol/1" tag="a" class="nav-link">
+                        <NuxtLink to="/favorites/1" tag="a" class="nav-link">
                             Favorites
                         </NuxtLink>
                     </li>

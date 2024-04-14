@@ -16,17 +16,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/history/' + page">Previous</a></li>
+                            <li v-else><a :href="'/favorites/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/history/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/favorites/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/history/' + page">{{ page }}</a></li>
+                            <li class="active"><a :href="'/favorites/' + page">{{ page }}</a></li>
                             <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)"
                                 :key="index">
-                                <a :href="'/history/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/favorites/' + nextPage">{{ nextPage }}</a>
                             </li>
                             <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/history/' + page">Next</a></li>
+                            <li v-else><a :href="'/favorites/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,11 +38,10 @@
 <script setup>
 const route = useRoute();
 const { isMobile, isTablet } = useDevice();
-let historyCookie = useCookie('history')
 
 let page = route.params.page;
 
-if (isNaN(page) || !historyCookie.value) {
+if (isNaN(page)) {
     throw createError({ statusCode: 500, statusMessage: 'It seems that you are using invalid parameters!' })
 }
 
@@ -53,14 +52,20 @@ if (page == null || page == "" || page < 1) {
 const runtimeConfig = useRuntimeConfig();
 const api = runtimeConfig.public.apiBase;
 
-const { data: getJavs } = await useFetch(api + '/javs/historyJav', {
-        method: 'POST',
-        body: {
-            history: historyCookie.value.reverse(),
-            page: page
-        }
-    })
+const cookieToken = useCookie('token');
+const cookieBearer = 'Bearer ' + cookieToken.value;
+const myHeaders = new Headers();
+myHeaders.append("authorization", cookieBearer);
 
+const { data: getJavs } = await useFetch(api + '/javs/getfavoritebypage', {
+    method: 'POST',
+    headers: myHeaders,
+    body: {
+        param: 'release_date',
+        order: 'desc',
+        page: page
+    }
+})
 
 if (getJavs._value.Response == null) {
     throw createError({ statusCode: 404, statusMessage: 'You found a dead end!' })
@@ -78,12 +83,12 @@ useHead({
 })
 
 const nextClick = () => {
-    let nextPage = '/history/' + (parseInt(page) + 1);
+    let nextPage = '/favorites/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/history/' + (parseInt(page) - 1);
+    let prevPage = '/favorites/' + (parseInt(page) - 1);
     return prevPage;
 };
 
