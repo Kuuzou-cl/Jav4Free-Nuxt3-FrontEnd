@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <NuxtLink to="/javs/1" tag="a" class="nav-link">
+                        <NuxtLink to="/javs/1/Latest J4F Added" tag="a" class="nav-link">
                             JAVs
                         </NuxtLink>
                     </li>

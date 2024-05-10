@@ -14,9 +14,9 @@
                             Order By
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item active" href="#">Code name</a></li>
-                            <li><a class="dropdown-item" href="#">Release Date</a></li>
-                            <li><a class="dropdown-item" href="#">J4F Date</a></li>
+                            <li><a class="dropdown-item active">Code name</a></li>
+                            <li><a class="dropdown-item">Release Date</a></li>
+                            <li><a class="dropdown-item">J4F Date</a></li>
                         </ul>
                     </div>
                 </div>

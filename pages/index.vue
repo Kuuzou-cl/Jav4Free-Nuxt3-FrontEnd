@@ -4,7 +4,7 @@
       <div class="col-lg-12 text-center">
         <div class="alert alert-dark" role="alert">
           Newest JAV Added
-          <NuxtLink to="/javs/1" tag="button" class="btn btn-dark">View More <font-awesome-icon
+          <NuxtLink to="/javs/1/Latest J4F Added" tag="button" class="btn btn-dark">View More <font-awesome-icon
               icon="fa-solid fa-circle-play" />
           </NuxtLink>
         </div>
@@ -57,7 +57,7 @@
         <div class="col-lg-12 text-center">
           <div class="alert alert-dark" role="alert">
             Newest Videos Added
-            <NuxtLink to="/javs/1" tag="button" class="btn btn-dark">View More <font-awesome-icon
+            <NuxtLink to="/javs/1/Latest J4F Added" tag="button" class="btn btn-dark">View More <font-awesome-icon
                 icon="fa-solid fa-circle-play" />
             </NuxtLink>
           </div>
@@ -115,7 +115,7 @@ const api = runtimeConfig.public.apiBase;
 const { data: getnewestJavs } = await useFetch(api + '/javs/getlatest?limit=' + 2);
 const { data: getnewestJavsbyId } = await useFetch(api + '/javs/getlatest?limit=' + 4 + '&order=id');
 const { data: getCategories } = await useFetch(api + '/categories/getHotCategories?limit=' + 6);
-const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + 12);
+const { data: getJavs } = await useFetch(api + '/javs/getlatest?limit=' + 12 + '&order=id');
 const { data: getIdols } = await useFetch(api + '/idols/getrandombylimit?limit=' + 6);
 
 let newestJavs = getnewestJavs._value.Response;
