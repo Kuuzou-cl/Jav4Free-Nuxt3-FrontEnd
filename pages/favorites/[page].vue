@@ -7,6 +7,21 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Order By
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item active" href="#">Code name</a></li>
+                            <li><a class="dropdown-item" href="#">Release Date</a></li>
+                            <li><a class="dropdown-item" href="#">J4F Date</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div v-for="jav in javbypage.Javs" :key="jav.id" class="col-lg-3">
                     <CardScene v-bind:data="jav" />
                 </div>

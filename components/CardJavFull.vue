@@ -48,15 +48,7 @@ myHeaders.append("authorization", cookieBearer);
 let stateUser = false;
 let favoriteState = ref(false);
 
-const { data } = await useFetch(api + '/javs/checkFavorite', {
-  method: 'POST',
-  headers: myHeaders,
-  body: {
-    id: props.data.id
-  }
-});
 
-favoriteState.value = data._value.Response;
 
 if (cookieEmail.value != null && cookieToken.value != null) {
   const myHeaders = new Headers();
@@ -71,6 +63,17 @@ if (cookieEmail.value != null && cookieToken.value != null) {
 
   if (data._value.alive) {
     stateUser = data._value.alive
+
+    const { data } = await useFetch(api + '/javs/checkFavorite', {
+      method: 'POST',
+      headers: myHeaders,
+      body: {
+        id: props.data.id
+      }
+    });
+
+    favoriteState.value = data._value.Response;
+
   } else {
     stateUser = false;
     cookieEmail.value = null;
