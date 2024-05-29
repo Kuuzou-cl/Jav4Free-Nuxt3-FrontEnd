@@ -16,17 +16,17 @@
                     <div class="container-pagination">
                         <ul class="pagination">
                             <li v-if="page != 1"><a :href="prevClick()">Previous</a></li>
-                            <li v-else><a :href="'/javs/' + page">Previous</a></li>
+                            <li v-else><a :href="'/weekly-top/' + page">Previous</a></li>
                             <li v-if="!isMobile" v-for="(prevPage, index) in previousPages(page)" :key="index">
-                                <a :href="'/javs/' + prevPage">{{ prevPage }}</a>
+                                <a :href="'/weekly-top/' + prevPage">{{ prevPage }}</a>
                             </li>
-                            <li class="active"><a :href="'/javs/' + page">{{ page }}</a></li>
+                            <li class="active"><a :href="'/weekly-top/' + page">{{ page }}</a></li>
                             <li v-if="!isMobile" v-for="(nextPage, index) in nextPages(page, javbypage.lastPage)"
                                 :key="index">
-                                <a :href="'/javs/' + nextPage">{{ nextPage }}</a>
+                                <a :href="'/weekly-top/' + nextPage">{{ nextPage }}</a>
                             </li>
                             <li v-if="page < javbypage.lastPage"><a :href="nextClick()">Next</a></li>
-                            <li v-else><a :href="'/javs/' + page">Next</a></li>
+                            <li v-else><a :href="'/weekly-top/' + page">Next</a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,12 +70,12 @@ useHead({
 })
 
 const nextClick = () => {
-    let nextPage = '/javs/' + (parseInt(page) + 1);
+    let nextPage = '/weekly-top/' + (parseInt(page) + 1);
     return nextPage;
 };
 
 const prevClick = () => {
-    let prevPage = '/javs/' + (parseInt(page) - 1);
+    let prevPage = '/weekly-top/' + (parseInt(page) - 1);
     return prevPage;
 };
 
